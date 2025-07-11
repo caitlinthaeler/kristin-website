@@ -28,6 +28,12 @@ export default {
 			object.writeHttpMetadata(headers);
 			headers.set("etag", object.httpEtag);
 
+			// Add CORS headers here:
+			headers.set("Access-Control-Allow-Origin", "*"); // or your domain like "https://kristinthaeler.com"
+			headers.set("Access-Control-Allow-Methods", "GET");
+			headers.set("Access-Control-Allow-Headers", "Content-Type");
+
+
 			return new Response(object.body, {
 				headers,
 			});
