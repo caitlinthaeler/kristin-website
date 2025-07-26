@@ -47,6 +47,7 @@ r2_base_url: "https://r2-worker.caitlin-thaeler.workers.dev/"
 # their entries' file path in the `include:` list.
 #
 # exclude:
+
 #   - .sass-cache/
 #   - .jekyll-cache/
 #   - gemfiles/
