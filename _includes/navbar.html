@@ -2,7 +2,7 @@
   <ul class="nav-list">
     {% assign current_url = page.url %}
     <li>
-      <a href="/home/" class="{% if current_url == '/home/' %}active{% endif %}">Home</a>
+      <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}active{% endif %}">Home</a>
     </li>
     <li>
       <a href="/animations/" class="{% if current_url == '/animations/' %}active{% endif %}">Animations</a>

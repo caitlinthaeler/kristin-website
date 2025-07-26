@@ -1,6 +1,9 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: default
+title: Home
+permalink: /
 ---
+
+<!-- Your homepage content goes here -->
+<h1>Kristin Thaeler</h1>
+<p>hello there :D</p>
