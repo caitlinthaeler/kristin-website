@@ -1,0 +1,14 @@
+<div class="animation-gallery">
+    {% for animation in site.data.animations %}
+        <div class="animation-entry">
+        {% assign ext = animation.filename | split: '.' | last | downcase %}
+
+        {% if ext == 'mp4' or ext == 'webm' %}
+            <video src="{{ site.r2_base_url }}{{ animation.filename }}" controls playsinline muted loop></video>
+        {% else %}
+            <img src="{{ site.r2_base_url }}{{ animation.filename }}" alt="">
+        {% endif %}
+        </div>
+    {% endfor %}
+</div>
+

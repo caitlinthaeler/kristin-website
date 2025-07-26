@@ -34,6 +34,10 @@ theme: minima
 plugins:
   - jekyll-feed
 
+# url for kristin's R2 worker
+r2_base_url: "https://r2-worker.caitlin-thaeler.workers.dev/"
+
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to

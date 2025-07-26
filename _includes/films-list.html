@@ -1,0 +1,20 @@
+<div class="films-list">
+  {% for film in site.data.films %}
+    <div class="film-item">
+      <div class="film-video">
+        {% assign ext = film.filename | split: '.' | last %}
+        {% if ext == 'mp4' or ext == 'webm' %}
+          <video src="{{ site.r2_base_url }}{{ film.filename }}" controls></video>
+        {% else %}
+          <img src="{{ site.r2_base_url }}{{ film.filename }}" alt="{{ film.title }}">
+        {% endif %}
+      </div>
+      <div class="film-info">
+        <h2 class="film-title">
+          <a href="#" class="film-link">{{ film.title }}</a>
+        </h2>
+        <p class="film-description">{{ film.description }}</p>
+      </div>
+    </div>
+  {% endfor %}
+</div>
