@@ -1,0 +1,21 @@
+<div id="animation-modal" class="hidden">
+  <button id="close-modal">Close ✕</button>
+
+  <div class="animation-viewer">
+    <div class="main-and-carousel">
+        <div id="main-animation"></div>
+        <div class="carousel-column">
+        {% for animation in site.data.animations %}
+            <div class="carousel-item" data-index="{{ forloop.index0 }}">
+            <img src="{{ site.r2_base_url }}{{ animation.filename }}" alt="">
+            </div>
+            
+        {% endfor %}
+        </div>
+    </div>
+    
+  </div>
+</div>
+
+
+

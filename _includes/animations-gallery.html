@@ -4,9 +4,9 @@
         {% assign ext = animation.filename | split: '.' | last | downcase %}
 
         {% if ext == 'mp4' or ext == 'webm' %}
-            <video src="{{ site.r2_base_url }}{{ animation.filename }}" controls playsinline muted loop></video>
+            <video class="gallery-item thumbnail" src="{{ site.r2_base_url }}{{ animation.filename }}" data-index="{{ forloop.index0 }}" controls playsinline muted loop></video>
         {% else %}
-            <img src="{{ site.r2_base_url }}{{ animation.filename }}" alt="">
+            <img class="gallery-item thumbnail" src="{{ site.r2_base_url }}{{ animation.filename }}" data-index="{{ forloop.index0 }}" alt="">
         {% endif %}
         </div>
     {% endfor %}

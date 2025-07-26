@@ -110,3 +110,142 @@
   line-height: 1.5;
 }
 
+.hidden {
+  display: none !important; /* Use !important to override any inline styles */
+}
+
+/* Full screen modal */
+#animation-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+/* Container inside modal: flex column with fixed height */
+.animation-viewer {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  height: 90vh;       /* fill 90% of viewport height */
+  border-radius: 8px;
+  background: transparent;
+  overflow: hidden;
+}
+
+/* Stack carousel + main animation vertically */
+.main-and-carousel {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+}
+
+/* Carousel takes about 20% height, at top */
+.carousel-column {
+  flex-shrink: 0;
+  height: 20%;
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  align-items: center;
+  padding: 0 1rem;
+  scrollbar-width: thin;  /* Firefox scrollbar styling */
+  overscroll-behavior: contain; /* Modern browsers */
+  -webkit-overflow-scrolling: touch; /* iOS-specific */
+}
+
+body.modal-open {
+  overflow: hidden;
+  touch-action: none; /* prevent gestures like swipe-back */
+}
+
+
+/* Carousel items horizontally */
+.carousel-item {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  overflow: hidden;
+  flex: 0 0 auto; /* fixed size */
+  width: 70px;
+  height: 70px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.carousel-item:hover {
+  border-color: #e63946;
+  box-shadow: 0 0 8px rgba(230, 57, 70, 0.5);
+}
+
+.carousel-item.selected {
+  border-color: #e63946;
+  box-shadow: 0 0 12px rgba(230, 57, 70, 0.8);
+}
+
+/* Main animation takes about 80% height, below carousel */
+#main-animation {
+  flex-grow: 1;           /* fill remaining space */
+  max-height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: transparent;       /* optional black bg for video/images */
+}
+
+/* Media inside main animation */
+#main-animation img,
+#main-animation video {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Close button styling */
+#close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+  z-index: 1100;
+}
+
+.thumbnail {
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.1s ease;
+}
+
+.thumbnail:hover {
+  filter: brightness(1.1); /* Lighten on hover */
+  transform: scale(1.2);
+}
+
+.thumbnail:active {
+  transform: scale(0.98); /* Slight press effect */
+}
+
+.thumbnail.selected {
+  outline: 2px solid #e63946; /* Highlight selected thumbnail */
+  outline-offset: 2px;
+  filter: brightness(1.2); /* Slightly more lit to show it's active */
+}
+
+
+
