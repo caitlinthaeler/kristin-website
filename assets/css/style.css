@@ -247,5 +247,56 @@ body.modal-open {
   filter: brightness(1.2); /* Slightly more lit to show it's active */
 }
 
+.page-nav-button-row {
+  display: flex;
+  flex-wrap: wrap;      /* allow wrapping to next line */
+  gap: 1rem;
+  justify-content: center; /* center buttons if less than full width */
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+/* Flexible buttons that share the row width */
+.custom-button {
+  flex: 1 1 22%;       /* grow/shrink, basis ~22% for ~4 buttons with gaps */
+  max-width: 250px;    /* optional max width */
+  min-width: 150px;    /* optional min width to prevent too small */
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 8px;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  transition: filter 0.3s ease;
+}
+
+.custom-button:hover,
+.custom-button:focus {
+  filter: brightness(1.2);
+}
+
+.button-text {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  font-size: 1.2rem;
+  text-shadow: 0 0 5px rgba(0,0,0,0.7);
+  pointer-events: none;
+}
+
+/* For smaller screens, force 2 columns */
+@media (max-width: 600px) {
+  .custom-button {
+    flex: 1 1 45%;  /* roughly 2 per row */
+    max-width: none; /* remove max-width to better fill */
+  }
+}
+
 
 
