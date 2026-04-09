@@ -1,0 +1,9 @@
+name = "kristin-website"
+pages_build_output_dir = ".vercel/output/static"
+compatibility_date = "2025-04-09"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "kristin-portfolio"
+database_id = "d1d3e2fd-fd55-451c-b905-d205d29125b8"

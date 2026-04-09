@@ -3,3 +3,22 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
+
+# Next.js
+.next/
+out/
+.vercel/
+
+# Node
+node_modules/
+
+# Cloudflare
+.wrangler/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
