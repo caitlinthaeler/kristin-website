@@ -88,8 +88,14 @@ export default function FilmsList() {
 
   useEffect(() => {
     fetch('/api/films')
-      .then((r) => r.json() as Promise<Media[]>)
-      .then((data) => { setFilms(data); setLoading(false) })
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json() as Promise<Media[]>
+      })
+      .then((data) => {
+        setFilms(Array.isArray(data) ? data : [])
+        setLoading(false)
+      })
       .catch(() => { setError('Failed to load films.'); setLoading(false) })
   }, [])
 

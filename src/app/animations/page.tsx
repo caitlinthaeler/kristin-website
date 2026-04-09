@@ -1,4 +1,4 @@
-import AnimationsGallery from '@/components/AnimationsGallery'
+import AnimationsGallery from './components/AnimationsGallery'
 
 export const metadata = { title: 'Animations — Kristin Thaeler' }
 
