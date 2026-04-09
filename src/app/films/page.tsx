@@ -1,4 +1,4 @@
-import FilmsList from '@/components/FilmsList'
+import FilmsList from './components/FilmsList'
 
 export const metadata = { title: 'Films — Kristin Thaeler' }
 

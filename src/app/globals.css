@@ -2,241 +2,250 @@
 @import "tw-animate-css";
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   KRISTIN THAELER PORTFOLIO — Design System
+   KRISTIN THAELER — "firresketches"
    ═══════════════════════════════════════════════════════════════════════════
-   Dark animation portfolio palette. Deep ink backgrounds, warm ember accent,
-   soft cream text. Artwork-first — the UI gets out of the way.
+   Three-color brand palette + a warm-purple dark scale.
+   Everything dark feels like a studio at 2am, not a generic dark mode.
+   Fire-warm accents echo the "fir(re)" in firresketches.
 
-   Palette: ember, gold, ink, dusk, smoke, ash, haze, mist, chalk
-   Layers:  @layer theme → @theme inline → @layer base → @layer components
-   Usage:   bg-background  text-foreground  bg-surface  text-primary
+   Brand:  --ember  --gold  --rose
+   Scale:  --void → --deep → --hollow → --shade → --veil → --fog → --silver → --cream
+   Layers: @layer theme → @theme inline → @layer base → @layer components
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ── @layer theme — HSL design tokens ── */
 @layer theme {
   :root {
-    /* ── Base Palette ── */
-    --ember:   8   85% 58%;   /* warm red-orange accent  */
-    --gold:    40  88% 60%;   /* warm gold secondary     */
-    --ink:     238 22%  6%;   /* deepest background      */
-    --dusk:    236 18% 10%;   /* main background         */
-    --smoke:   234 14% 16%;   /* surface / cards         */
-    --ash:     232 10% 26%;   /* borders, subtle         */
-    --haze:    225  8% 55%;   /* muted text              */
-    --mist:    220 18% 88%;   /* primary text            */
-    --chalk:   220 14% 96%;   /* near-white              */
-    --crimson: 352 75% 50%;   /* destructive             */
-    --jade:    152 60% 42%;   /* success                 */
-    --black:     0  0%  0%;
-    --white:     0  0% 100%;
+    /* ── Brand ── */
+    --ember:   18  92%  60%;   /* fire orange — primary */
+    --gold:    40  85%  62%;   /* warm gold — secondary */
+    --rose:   338  60%  68%;   /* dusty rose — accent / tertiary */
 
-    /* ── Semantic tokens ── */
-    --background:           var(--dusk);
-    --foreground:           var(--mist);
-    --surface:              var(--smoke);
-    --surface-elevated:     var(--ash);
-    --muted:                var(--smoke);
-    --muted-foreground:     var(--haze);
-    --muted-text:           var(--haze);
-    --subtle:               var(--ash);
-    --subtle-foreground:    var(--haze);
-    --border:               var(--ash);
-    --input:                var(--smoke);
-    --input-foreground:     var(--mist);
-    --ring:                 var(--ember);
-    --primary:              var(--ember);
-    --primary-foreground:   var(--chalk);
-    --secondary:            var(--gold);
-    --secondary-foreground: var(--ink);
-    --accent:               var(--gold);
-    --accent-foreground:    var(--ink);
-    --destructive:          var(--crimson);
+    /* ── Dark scale (warm-purple cast — not grey) ── */
+    --void:   252  38%   4%;   /* near-black background layer */
+    --deep:   250  30%   7%;   /* main page background */
+    --hollow: 248  22%  11%;   /* card / surface */
+    --shade:  245  16%  17%;   /* elevated surface */
+    --veil:   242  12%  26%;   /* borders */
+    --fog:    236   8%  50%;   /* muted / placeholder text */
+    --silver: 230  16%  76%;   /* secondary text */
+    --cream:  226  28%  94%;   /* primary text */
+
+    /* ── Utility ── */
+    --white:    0   0% 100%;
+    --black:    0   0%   0%;
+    --crimson: 350  80%  52%;
+    --jade:    152  58%  44%;
+
+    /* ── Semantic mapping ── */
+    --background:             var(--deep);
+    --foreground:             var(--cream);
+    --surface:                var(--hollow);
+    --surface-elevated:       var(--shade);
+    --border:                 var(--veil);
+    --input:                  var(--hollow);
+    --input-foreground:       var(--cream);
+    --ring:                   var(--ember);
+    --muted:                  var(--fog);
+    --primary:                var(--ember);
+    --primary-foreground:     var(--cream);
+    --secondary:              var(--gold);
+    --secondary-foreground:   var(--void);
+    --accent:                 var(--rose);
+    --accent-foreground:      var(--void);
+    --card:                   var(--hollow);
+    --card-foreground:        var(--cream);
+    --overlay:                var(--void);
+    --destructive:            var(--crimson);
     --destructive-foreground: var(--white);
-    --success:              var(--jade);
-    --success-foreground:   var(--white);
-    --card:                 var(--smoke);
-    --card-foreground:      var(--mist);
-    --overlay:              var(--ink);
-    --skeleton:             var(--smoke);
-
-    /* ── Sidebar (admin) ── */
-    --sidebar:              var(--ink);
-    --sidebar-foreground:   var(--mist);
-    --sidebar-border:       var(--ash);
-    --sidebar-primary:      var(--ember);
-    --sidebar-primary-foreground: var(--chalk);
-
-    /* ── Shadows ── */
-    --shadow:           var(--black);
-    --shadow-opacity:   0.5;
+    --success:                var(--jade);
+    --success-foreground:     var(--white);
+    --sidebar:                var(--void);
+    --sidebar-foreground:     var(--cream);
+    --sidebar-border:         var(--veil);
+    --sidebar-primary:        var(--ember);
+    --sidebar-primary-foreground: var(--cream);
   }
 }
 
-/* ── @theme inline — Tailwind v4 bridge ── */
 @theme inline {
-  --font-heading: 'Inter', system-ui, sans-serif;
-  --font-body:    'Inter', system-ui, sans-serif;
+  --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
 
-  /* Semantic colors → Tailwind utilities */
-  --color-background:           hsl(var(--background));
-  --color-foreground:           hsl(var(--foreground));
-  --color-surface:              hsl(var(--surface));
-  --color-surface-elevated:     hsl(var(--surface-elevated));
-  /* text-muted = dim/secondary text (haze). bg-muted = muted surface (smoke). */
-  --color-muted:                hsl(var(--haze));
-  --color-muted-bg:             hsl(var(--smoke));
-  --color-muted-foreground:     hsl(var(--muted-foreground));
-  --color-subtle:               hsl(var(--subtle));
-  --color-subtle-foreground:    hsl(var(--subtle-foreground));
-  --color-border:               hsl(var(--border));
-  --color-input:                hsl(var(--input));
-  --color-input-foreground:     hsl(var(--input-foreground));
-  --color-ring:                 hsl(var(--ring));
-  --color-primary:              hsl(var(--primary));
-  --color-primary-foreground:   hsl(var(--primary-foreground));
-  --color-secondary:            hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --color-accent:               hsl(var(--accent));
-  --color-accent-foreground:    hsl(var(--accent-foreground));
-  --color-destructive:          hsl(var(--destructive));
+  --color-background:             hsl(var(--background));
+  --color-foreground:             hsl(var(--foreground));
+  --color-surface:                hsl(var(--surface));
+  --color-surface-elevated:       hsl(var(--surface-elevated));
+  --color-border:                 hsl(var(--border));
+  --color-input:                  hsl(var(--input));
+  --color-input-foreground:       hsl(var(--input-foreground));
+  --color-ring:                   hsl(var(--ring));
+  --color-muted:                  hsl(var(--muted));
+  --color-primary:                hsl(var(--primary));
+  --color-primary-foreground:     hsl(var(--primary-foreground));
+  --color-secondary:              hsl(var(--secondary));
+  --color-secondary-foreground:   hsl(var(--secondary-foreground));
+  --color-accent:                 hsl(var(--accent));
+  --color-accent-foreground:      hsl(var(--accent-foreground));
+  --color-card:                   hsl(var(--card));
+  --color-card-foreground:        hsl(var(--card-foreground));
+  --color-overlay:                hsl(var(--overlay));
+  --color-destructive:            hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
-  --color-success:              hsl(var(--success));
-  --color-success-foreground:   hsl(var(--success-foreground));
-  --color-card:                 hsl(var(--card));
-  --color-card-foreground:      hsl(var(--card-foreground));
-  --color-overlay:              hsl(var(--overlay));
-  --color-skeleton:             hsl(var(--skeleton));
-  --color-sidebar:              hsl(var(--sidebar));
-  --color-sidebar-foreground:   hsl(var(--sidebar-foreground));
-  --color-sidebar-border:       hsl(var(--sidebar-border));
-  --color-sidebar-primary:      hsl(var(--sidebar-primary));
+  --color-success:                hsl(var(--success));
+  --color-success-foreground:     hsl(var(--success-foreground));
+  --color-sidebar:                hsl(var(--sidebar));
+  --color-sidebar-foreground:     hsl(var(--sidebar-foreground));
+  --color-sidebar-border:         hsl(var(--sidebar-border));
+  --color-sidebar-primary:        hsl(var(--sidebar-primary));
   --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
 
   /* Brand direct-access */
   --color-ember:   hsl(var(--ember));
   --color-gold:    hsl(var(--gold));
-  --color-ink:     hsl(var(--ink));
-  --color-dusk:    hsl(var(--dusk));
-  --color-smoke:   hsl(var(--smoke));
-  --color-ash:     hsl(var(--ash));
-  --color-haze:    hsl(var(--haze));
-  --color-mist:    hsl(var(--mist));
-  --color-chalk:   hsl(var(--chalk));
-  --color-crimson: hsl(var(--crimson));
+  --color-rose:    hsl(var(--rose));
+  --color-void:    hsl(var(--void));
+  --color-deep:    hsl(var(--deep));
+  --color-hollow:  hsl(var(--hollow));
+  --color-shade:   hsl(var(--shade));
+  --color-veil:    hsl(var(--veil));
+  --color-fog:     hsl(var(--fog));
+  --color-silver:  hsl(var(--silver));
+  --color-cream:   hsl(var(--cream));
   --color-white:   hsl(var(--white));
   --color-black:   hsl(var(--black));
 
   /* Radii */
-  --radius:      0.625rem;
-  --radius-sm:   calc(var(--radius) - 4px);
-  --radius-md:   calc(var(--radius) - 2px);
-  --radius-lg:   var(--radius);
-  --radius-xl:   calc(var(--radius) + 4px);
-  --radius-2xl:  calc(var(--radius) + 10px);
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   14px;
+  --radius-xl:   22px;
+  --radius-2xl:  36px;
   --radius-full: 9999px;
 
-  /* Spacing */
-  --space-xs:  clamp(0.25rem, 0.5vw, 0.5rem);
-  --space-sm:  clamp(0.5rem, 1vw, 0.75rem);
-  --space-md:  clamp(0.75rem, 1.5vw, 1rem);
-  --space-lg:  clamp(1rem, 2vw, 1.5rem);
-  --space-xl:  clamp(1.5rem, 3vw, 2rem);
-  --space-2xl: clamp(2rem, 4vw, 3rem);
-
-  /* Effects */
-  --ease-spring:     cubic-bezier(0.2, 0.6, 0.2, 1);
-  --duration-fast:   150ms;
-  --duration-normal: 250ms;
-  --duration-slow:   400ms;
+  /* Motion */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:    120ms;
+  --dur-base:    240ms;
+  --dur-slow:    400ms;
+  --dur-xslow:   700ms;
 }
 
-/* ── @layer base — Document defaults ── */
 @layer base {
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: var(--font-body);
-    min-height: 100vh;
+    font-family: var(--font-sans);
+    min-height: 100dvh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
+    font-family: var(--font-display);
     font-weight: 700;
     color: hsl(var(--foreground));
+    line-height: 1.05;
+    letter-spacing: -0.02em;
   }
 
-  p { color: hsl(var(--foreground)); }
-  a { color: inherit; text-decoration: none; }
+  p  { color: hsl(var(--foreground)); }
+  a  { color: inherit; text-decoration: none; }
   video { display: block; max-width: 100%; }
+
+  ::selection {
+    background: hsl(var(--ember) / 0.28);
+    color: hsl(var(--cream));
+  }
 
   :focus-visible {
     outline: 2px solid hsl(var(--ring));
-    outline-offset: 2px;
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 
-  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb {
-    background: hsl(var(--ash));
+    background: hsl(var(--veil));
     border-radius: var(--radius-full);
   }
-  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--haze)); }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--fog)); }
 }
 
-/* ── @layer components — Reusable design tokens ── */
 @layer components {
+  /* Skeleton — pseudo-element shimmer so it works on any bg */
   .skeleton {
+    position: relative;
+    overflow: hidden;
+    background: hsl(var(--hollow));
+    border-radius: var(--radius-md);
+    isolation: isolate;
+  }
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
     background: linear-gradient(
-      90deg,
-      hsl(var(--smoke)) 25%,
-      hsl(var(--ash))   50%,
-      hsl(var(--smoke)) 75%
+      105deg,
+      transparent 40%,
+      hsl(var(--shade) / 0.7) 50%,
+      transparent 60%
     );
     background-size: 200% 100%;
-    animation: shimmer 1.6s infinite;
-    border-radius: var(--radius-md);
+    animation: shimmer 1.8s ease-in-out infinite;
   }
 
+  /* Horizontal scroll container */
   .scroll-x {
     overflow-x: auto;
     scrollbar-width: thin;
-    scrollbar-color: hsl(var(--ash)) transparent;
+    scrollbar-color: hsl(var(--veil)) transparent;
   }
 
-  .hover-lift {
-    transition: transform var(--duration-normal) var(--ease-spring),
-                box-shadow var(--duration-normal) var(--ease-spring);
-  }
-  .hover-lift:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 32px -8px hsl(var(--black) / 0.6);
+  /* Text gradient: cream → ember */
+  .text-fire {
+    background: linear-gradient(120deg, hsl(var(--cream)) 30%, hsl(var(--ember)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  .interactive-scale {
-    transition: transform var(--duration-fast) var(--ease-spring);
+  /* Glassy card surface */
+  .glass {
+    background: hsl(var(--hollow) / 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--veil) / 0.6);
   }
-  .interactive-scale:hover { transform: scale(1.03); }
+
+  /* Ember glow on hover */
+  .glow-ember {
+    transition: box-shadow var(--dur-base) var(--ease-out);
+  }
+  .glow-ember:hover {
+    box-shadow:
+      0 0 0 1px hsl(var(--ember) / 0.3),
+      0 8px 32px -8px hsl(var(--ember) / 0.25);
+  }
 }
 
-/* ── @layer utilities ── */
 @layer utilities {
-  .animate-fade-in { animation: fade-in 0.2s ease both; }
+  .animate-fade-in  { animation: fade-in  0.4s var(--ease-out) both; }
+  .animate-slide-up { animation: slide-up 0.5s var(--ease-out) both; }
 
   @keyframes fade-in {
-    from { opacity: 0; transform: translateY(6px); }
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(28px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-
   @keyframes shimmer {
     0%   { background-position: -200% 0; }
     100% { background-position:  200% 0; }
