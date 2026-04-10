@@ -31,12 +31,8 @@ export default {
 					return new Response("Missing object key", { status: 400, headers: CORS_HEADERS });
 				}
 
-				// Extract top-level folder from key (e.g. "animations/running.gif")
-				const [folder, ...rest] = key.split("/");
-				const fullKey = `${folder}/${rest.join("/")}`;
-
-				// Get object from R2
-				const object = await env.KRISTIN_BUCKET.get(fullKey);
+				// Get object from R2 using the full key as-is
+				const object = await env.KRISTIN_BUCKET.get(key);
 
 				if (object === null) {
 					return new Response("Object Not Found", { status: 404, headers: CORS_HEADERS });
@@ -49,7 +45,7 @@ export default {
 
 				// Guess and set Content-Type if missing
 				if (!headers.has("Content-Type")) {
-					const guessed = getMimeType(fullKey);
+					const guessed = getMimeType(key);
 					if (guessed) headers.set("Content-Type", guessed);
 				}
 

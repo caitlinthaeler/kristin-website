@@ -34,12 +34,12 @@ CREATE TABLE IF NOT EXISTS media (
   updated_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
--- Seed existing media
+-- Seed existing media (keys match R2 object keys exactly — no folder prefix for manually uploaded files)
 INSERT OR IGNORE INTO media (filename, title, description, type) VALUES
-  ('films/Thaeler_WhenTheSnowFalls_052825.mp4', 'When The Snow Falls', 'description of the film', 'film'),
-  ('films/Render_v16.mp4', 'Plane Pals', 'Plane Pals, a short film about a shy girl who musters up the courage to make a new friend', 'film'),
-  ('animations/shot36_color_KT_v01.gif', NULL, NULL, 'animation'),
-  ('animations/shot32_color_KT_v04.gif', NULL, NULL, 'animation');
+  ('Thaeler_WhenTheSnowFalls_052825.mp4', 'When The Snow Falls', 'description of the film', 'film'),
+  ('Render_v16.mp4', 'Plane Pals', 'Plane Pals, a short film about a shy girl who musters up the courage to make a new friend', 'film'),
+  ('shot36_color_KT_v01.gif', NULL, NULL, 'animation'),
+  ('shot32_color_KT_v04.gif', NULL, NULL, 'animation');
 
 -- Projects (a film or animation project that groups media)
 CREATE TABLE IF NOT EXISTS projects (
