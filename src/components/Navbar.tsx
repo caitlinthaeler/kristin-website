@@ -78,7 +78,7 @@ function PanelImage({
 
       {/* Links */}
       <div>
-        <p className="text-[10px] tracking-[0.22em] uppercase font-semibold text-muted mb-5">{content.sub}</p>
+        <p className="text-[10px] tracking-[0.22em] uppercase font-semibold text-cream/60 mb-5">{content.sub}</p>
         <ul className="space-y-1">
           {content.links.map((link, i) => (
             <motion.li
@@ -91,14 +91,14 @@ function PanelImage({
                 href={link.href}
                 onClick={onClose}
                 className={`group inline-flex items-center gap-2.5 py-1.5 text-2xl font-black tracking-tight transition-colors ${
-                  pathname === link.href ? 'text-primary' : 'text-foreground hover:text-primary'
+                  pathname === link.href ? 'text-primary' : 'text-cream hover:text-primary'
                 }`}
               >
                 <span className="relative">
                   {link.label}
                   <span className="absolute -bottom-0.5 left-0 h-0.5 bg-primary w-0 group-hover:w-full transition-all duration-300 origin-left rounded-full" />
                 </span>
-                <svg className="w-4 h-4 text-muted/30 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <svg className="w-4 h-4 text-cream/30 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M7 7h10v10" />
                 </svg>
               </Link>
@@ -125,8 +125,8 @@ function PanelCards({ content, onClose }: { content: CardsPanel; onClose: () => 
             onClick={onClose}
             className={`group block rounded-xl p-5 ${card.color} hover:bg-primary/12 active:scale-98 transition-all duration-200`}
           >
-            <p className="font-black text-base text-foreground group-hover:text-primary transition-colors leading-tight">{card.label}</p>
-            <p className="text-xs text-muted mt-1.5 leading-snug">{card.desc}</p>
+            <p className="font-black text-base text-cream group-hover:text-primary transition-colors leading-tight">{card.label}</p>
+            <p className="text-xs text-cream/60 mt-1.5 leading-snug">{card.desc}</p>
           </Link>
         </motion.div>
       ))}
@@ -145,15 +145,15 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50" onMouseLeave={() => setOpen(null)}>
       {/* Bar */}
-      <div className="bg-background/92 backdrop-blur-md border-b border-border/30 relative z-10">
+      <div className="bg-bark/95 backdrop-blur-md border-b border-cream/10 relative z-10">
         <nav className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-8">
 
           {/* Logo */}
           <Link href="/" className="group shrink-0 flex flex-col justify-center leading-none gap-0.5" onClick={() => setOpen(null)}>
-            <span className="font-bold text-sm tracking-tight text-foreground group-hover:text-primary transition-colors duration-200">
+            <span className="font-bold text-sm tracking-tight text-cream group-hover:text-primary transition-colors duration-200">
               Kristin Thaeler
             </span>
-            <span className="text-[9px] tracking-[0.22em] uppercase text-muted group-hover:text-primary/70 transition-colors duration-200">
+            <span className="text-[9px] tracking-[0.22em] uppercase text-cream/60 group-hover:text-primary/70 transition-colors duration-200">
               @firresketches
             </span>
           </Link>
@@ -169,7 +169,7 @@ export default function Navbar() {
                   className={`px-3 py-1.5 rounded-full text-sm font-semibold transition-all duration-150 ${
                     isActive(item.href) || open === item.label
                       ? 'text-primary bg-primary/10'
-                      : 'text-foreground/70 hover:text-foreground hover:bg-surface'
+                      : 'text-cream/70 hover:text-cream hover:bg-earth'
                   }`}
                 >
                   {item.label}
@@ -188,7 +188,7 @@ export default function Navbar() {
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden p-1.5 rounded-md text-muted hover:text-foreground hover:bg-surface transition-colors"
+            className="md:hidden p-1.5 rounded-md text-cream/60 hover:text-cream hover:bg-earth/60 transition-colors"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -214,7 +214,7 @@ export default function Navbar() {
             animate={{ opacity: 1, clipPath: 'inset(0 0 0% 0)' }}
             exit={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden md:block absolute left-0 right-0 top-full bg-background/97 backdrop-blur-md border-b border-border/30 shadow-lg shadow-bark/5"
+            className="hidden md:block absolute left-0 right-0 top-full bg-bark/97 backdrop-blur-md border-b border-cream/10 shadow-lg shadow-earth/20"
           >
             {panel.type === 'image'
               ? <PanelImage label={open} content={panel} onClose={() => setOpen(null)} pathname={pathname} />
@@ -234,15 +234,15 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden overflow-hidden border-b border-border/30 bg-background/97 backdrop-blur-md"
+            className="md:hidden overflow-hidden border-b border-cream/10 bg-bark/97 backdrop-blur-md"
           >
             <div className="px-6 py-5 space-y-1">
               {NAV.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}
-                  className={`block py-3 text-base font-bold transition-colors border-b border-border/20 last:border-0 ${
-                    isActive(item.href) ? 'text-primary' : 'text-foreground'
+                  className={`block py-3 text-base font-bold transition-colors border-b border-cream/10 last:border-0 ${
+                    isActive(item.href) ? 'text-primary' : 'text-cream'
                   }`}
                   onClick={() => setMobileOpen(false)}
                 >

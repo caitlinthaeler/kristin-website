@@ -4,7 +4,7 @@ import SketchButton from '@/components/ui/SketchButton'
 const LINKS = [
   { label: 'Films',         href: '/films' },
   { label: 'Animations',   href: '/animations' },
-  { label: 'Life Drawings', href: '/life-drawings' },
+  { label: 'Personal',      href: '/personal' },
   { label: 'Gallery',      href: '/gallery' },
   { label: 'Services',     href: '/services' },
   { label: 'About',        href: '/about' },
@@ -32,7 +32,7 @@ function LinkedInIcon() {
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-border/30 overflow-hidden">
+    <footer className="relative bg-bark border-t border-cream/10 overflow-hidden">
       {/* Soft peach top accent */}
       <div
         className="absolute inset-x-0 top-0 h-px pointer-events-none"
@@ -43,10 +43,10 @@ export default function Footer() {
 
         {/* Left — branding */}
         <div>
-          <p className="font-black text-xl tracking-tight text-foreground mb-0.5">
+          <p className="font-black text-xl tracking-tight text-cream mb-0.5">
             Kristin Thaeler
           </p>
-          <p className="text-[10px] tracking-[0.22em] uppercase text-muted mb-6">
+          <p className="text-[10px] tracking-[0.22em] uppercase text-cream/60 mb-6">
             @firresketches
           </p>
           <nav className="flex flex-wrap gap-x-5 gap-y-2">
@@ -54,7 +54,7 @@ export default function Footer() {
               <Link
                 key={href}
                 href={href}
-                className="text-sm text-muted hover:text-primary underline-offset-2 hover:underline transition-colors duration-150"
+                className="text-sm text-cream/60 hover:text-primary underline-offset-2 hover:underline transition-colors duration-150"
               >
                 {label}
               </Link>
@@ -70,18 +70,18 @@ export default function Footer() {
               href="https://instagram.com/firresketches"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-muted hover:text-primary transition-colors duration-150"
+              className="flex items-center gap-1.5 text-xs text-cream/60 hover:text-cream transition-colors duration-150"
               aria-label="Instagram"
             >
               <InstagramIcon />
               <span>@firresketches</span>
             </a>
-            <span className="w-px h-3 bg-border/60" />
+            <span className="w-px h-3 bg-cream/20" />
             <a
               href="https://linkedin.com/in/kristinthaeler"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-muted hover:text-secondary transition-colors duration-150"
+              className="flex items-center gap-1.5 text-xs text-cream/60 hover:text-cream transition-colors duration-150"
               aria-label="LinkedIn"
             >
               <LinkedInIcon />
@@ -92,11 +92,11 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-border/20 px-6 py-4 max-w-6xl mx-auto flex items-center justify-between">
-        <p className="text-[11px] text-muted">
+      <div className="border-t border-cream/10 px-6 py-4 max-w-6xl mx-auto flex items-center justify-between">
+        <p className="text-[11px] text-cream/60">
           © {new Date().getFullYear()} Kristin Thaeler
         </p>
-        <p className="text-[11px] text-muted/60">
+        <p className="text-[11px] text-cream/30">
           All rights reserved
         </p>
       </div>
