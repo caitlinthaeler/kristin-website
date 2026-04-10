@@ -1,0 +1,25 @@
+.card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle 180px at var(--x, -9999px) var(--y, -9999px),
+    var(--spotlight, rgba(255,110,40,0.13)),
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.card:hover::before {
+  opacity: 1;
+}

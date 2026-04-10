@@ -5,10 +5,16 @@ export const runtime = 'edge'
 
 export async function GET() {
   try {
-    const { env } = getRequestContext()
-    const films = await getFilms(env.DB)
+    const ctx = getRequestContext()
+    const films = await getFilms(ctx.env.DB)
     return Response.json(films)
-  } catch {
+  } catch (e) {
+    // Outside Cloudflare runtime (e.g. `next dev`) — return empty list so the
+    // UI renders gracefully instead of crashing.
+    const msg = e instanceof Error ? e.message : String(e)
+    if (msg.includes('context') || msg.includes('binding') || msg.includes('not available')) {
+      return Response.json([])
+    }
     return Response.json({ error: 'Failed to fetch films' }, { status: 500 })
   }
 }

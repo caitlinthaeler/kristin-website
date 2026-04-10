@@ -2,74 +2,76 @@
 @import "tw-animate-css";
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   KRISTIN THAELER — "firresketches"
+   KRISTIN THAELER — firresketches
    ═══════════════════════════════════════════════════════════════════════════
-   Three-color brand palette + a warm-purple dark scale.
-   Everything dark feels like a studio at 2am, not a generic dark mode.
-   Fire-warm accents echo the "fir(re)" in firresketches.
+   Palette: whimsical light studio. Warm off-white backgrounds + peach +
+   turquoise + warm brown. Feels like a sunny sketchbook afternoon —
+   airy, soft, full of colour and personality.
 
-   Brand:  --ember  --gold  --rose
-   Scale:  --void → --deep → --hollow → --shade → --veil → --fog → --silver → --cream
+   Brands: --peach  --teal  --blush
+   Scale:  --cream → --pearl → --fog → --dusk → --stone → --bark → --earth
    Layers: @layer theme → @theme inline → @layer base → @layer components
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @layer theme {
   :root {
-    /* ── Brand ── */
-    --ember:   18  92%  60%;   /* fire orange — primary */
-    --gold:    40  85%  62%;   /* warm gold — secondary */
-    --rose:   338  60%  68%;   /* dusty rose — accent / tertiary */
+    /* ── Brand pigments ── */
+    --peach:  18  82%  68%;   /* warm peach-coral — primary  */
+    --teal:  178  48%  42%;   /* turquoise — secondary */
+    --blush:  14  55%  80%;   /* soft peach-rose — accent */
+    --tan:    30  50%  58%;   /* warm caramel — highlight */
 
-    /* ── Dark scale (warm-purple cast — not grey) ── */
-    --void:   252  38%   4%;   /* near-black background layer */
-    --deep:   250  30%   7%;   /* main page background */
-    --hollow: 248  22%  11%;   /* card / surface */
-    --shade:  245  16%  17%;   /* elevated surface */
-    --veil:   242  12%  26%;   /* borders */
-    --fog:    236   8%  50%;   /* muted / placeholder text */
-    --silver: 230  16%  76%;   /* secondary text */
-    --cream:  226  28%  94%;   /* primary text */
+    /* ── Light scale (warm white + brown cast) ── */
+    --cream:  32  40%  97%;   /* main background  */
+    --pearl:  30  22%  92%;   /* card surface     */
+    --fog:    27  16%  85%;   /* elevated surface */
+    --dusk:   24  14%  72%;   /* borders          */
+    --stone:  22  18%  50%;   /* muted text       */
+    --bark:   24  38%  28%;   /* body text        */
+    --earth:  22  42%  13%;   /* near-black       */
+    --parch:  30  40%  96%;   /* near-white       */
 
     /* ── Utility ── */
-    --white:    0   0% 100%;
-    --black:    0   0%   0%;
-    --crimson: 350  80%  52%;
-    --jade:    152  58%  44%;
+    --white:   0   0% 100%;
+    --black:   0   0%   0%;
+    --danger: 0  62%  52%;
+    --ok:    160  44%  42%;
 
     /* ── Semantic mapping ── */
-    --background:             var(--deep);
-    --foreground:             var(--cream);
-    --surface:                var(--hollow);
-    --surface-elevated:       var(--shade);
-    --border:                 var(--veil);
-    --input:                  var(--hollow);
-    --input-foreground:       var(--cream);
-    --ring:                   var(--ember);
-    --muted:                  var(--fog);
-    --primary:                var(--ember);
-    --primary-foreground:     var(--cream);
-    --secondary:              var(--gold);
-    --secondary-foreground:   var(--void);
-    --accent:                 var(--rose);
-    --accent-foreground:      var(--void);
-    --card:                   var(--hollow);
-    --card-foreground:        var(--cream);
-    --overlay:                var(--void);
-    --destructive:            var(--crimson);
+    --background:             var(--cream);
+    --foreground:             var(--bark);
+    --surface:                var(--pearl);
+    --surface-elevated:       var(--fog);
+    --border:                 var(--dusk);
+    --input:                  var(--pearl);
+    --input-foreground:       var(--bark);
+    --ring:                   var(--peach);
+    --muted:                  var(--stone);
+    --primary:                var(--peach);
+    --primary-foreground:     var(--earth);
+    --secondary:              var(--teal);
+    --secondary-foreground:   var(--cream);
+    --accent:                 var(--blush);
+    --accent-foreground:      var(--earth);
+    --card:                   var(--pearl);
+    --card-foreground:        var(--bark);
+    --overlay:                var(--earth);
+    --destructive:            var(--danger);
     --destructive-foreground: var(--white);
-    --success:                var(--jade);
+    --success:                var(--ok);
     --success-foreground:     var(--white);
-    --sidebar:                var(--void);
-    --sidebar-foreground:     var(--cream);
-    --sidebar-border:         var(--veil);
-    --sidebar-primary:        var(--ember);
-    --sidebar-primary-foreground: var(--cream);
+    --sidebar:                var(--pearl);
+    --sidebar-foreground:     var(--bark);
+    --sidebar-border:         var(--dusk);
+    --sidebar-primary:        var(--peach);
+    --sidebar-primary-foreground: var(--earth);
   }
 }
 
 @theme inline {
-  --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
-  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans:    var(--font-sans, 'Nunito', system-ui, sans-serif);
+  --font-display: var(--font-sans, 'Nunito', system-ui, sans-serif);
+  --font-mono:    var(--font-mono, 'DM Mono', monospace);
 
   --color-background:             hsl(var(--background));
   --color-foreground:             hsl(var(--foreground));
@@ -100,36 +102,35 @@
   --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
 
   /* Brand direct-access */
-  --color-ember:   hsl(var(--ember));
-  --color-gold:    hsl(var(--gold));
-  --color-rose:    hsl(var(--rose));
-  --color-void:    hsl(var(--void));
-  --color-deep:    hsl(var(--deep));
-  --color-hollow:  hsl(var(--hollow));
-  --color-shade:   hsl(var(--shade));
-  --color-veil:    hsl(var(--veil));
-  --color-fog:     hsl(var(--fog));
-  --color-silver:  hsl(var(--silver));
-  --color-cream:   hsl(var(--cream));
-  --color-white:   hsl(var(--white));
-  --color-black:   hsl(var(--black));
+  --color-peach:  hsl(var(--peach));
+  --color-teal:   hsl(var(--teal));
+  --color-blush:  hsl(var(--blush));
+  --color-tan:    hsl(var(--tan));
+  --color-cream:  hsl(var(--cream));
+  --color-pearl:  hsl(var(--pearl));
+  --color-fog:    hsl(var(--fog));
+  --color-dusk:   hsl(var(--dusk));
+  --color-stone:  hsl(var(--stone));
+  --color-bark:   hsl(var(--bark));
+  --color-earth:  hsl(var(--earth));
+  --color-parch:  hsl(var(--parch));
+  --color-white:  hsl(var(--white));
+  --color-black:  hsl(var(--black));
 
   /* Radii */
-  --radius-sm:   4px;
-  --radius-md:   8px;
-  --radius-lg:   14px;
-  --radius-xl:   22px;
-  --radius-2xl:  36px;
+  --radius-sm:   3px;
+  --radius-md:   6px;
+  --radius-lg:   12px;
+  --radius-xl:   20px;
+  --radius-2xl:  32px;
   --radius-full: 9999px;
 
   /* Motion */
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast:    120ms;
-  --dur-base:    240ms;
-  --dur-slow:    400ms;
-  --dur-xslow:   700ms;
+  --dur-fast:    140ms;
+  --dur-base:    260ms;
+  --dur-slow:    480ms;
 }
 
 @layer base {
@@ -140,6 +141,8 @@
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
     min-height: 100dvh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -147,42 +150,42 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 800;
     color: hsl(var(--foreground));
-    line-height: 1.05;
+    line-height: 1.15;
     letter-spacing: -0.02em;
   }
 
-  p  { color: hsl(var(--foreground)); }
-  a  { color: inherit; text-decoration: none; }
+  p { color: hsl(var(--foreground)); }
+  a { color: inherit; text-decoration: none; }
   video { display: block; max-width: 100%; }
 
   ::selection {
-    background: hsl(var(--ember) / 0.28);
-    color: hsl(var(--cream));
+    background: hsl(var(--peach) / 0.35);
+    color: hsl(var(--earth));
   }
 
   :focus-visible {
-    outline: 2px solid hsl(var(--ring));
+    outline: 1.5px solid hsl(var(--peach));
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 3px;
   }
 
   ::-webkit-scrollbar { width: 4px; height: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb {
-    background: hsl(var(--veil));
+    background: hsl(var(--dusk));
     border-radius: var(--radius-full);
   }
-  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--fog)); }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--stone)); }
 }
 
 @layer components {
-  /* Skeleton — pseudo-element shimmer so it works on any bg */
+  /* Skeleton */
   .skeleton {
     position: relative;
     overflow: hidden;
-    background: hsl(var(--hollow));
+    background: hsl(var(--pearl));
     border-radius: var(--radius-md);
     isolation: isolate;
   }
@@ -193,57 +196,73 @@
     background: linear-gradient(
       105deg,
       transparent 40%,
-      hsl(var(--shade) / 0.7) 50%,
+      hsl(var(--fog) / 0.9) 50%,
       transparent 60%
     );
     background-size: 200% 100%;
     animation: shimmer 1.8s ease-in-out infinite;
   }
 
-  /* Horizontal scroll container */
+  /* Horizontal scroll */
   .scroll-x {
     overflow-x: auto;
     scrollbar-width: thin;
-    scrollbar-color: hsl(var(--veil)) transparent;
+    scrollbar-color: hsl(var(--dusk)) transparent;
   }
 
-  /* Text gradient: cream → ember */
-  .text-fire {
-    background: linear-gradient(120deg, hsl(var(--cream)) 30%, hsl(var(--ember)));
+  /* Section label — small caps mono */
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: hsl(var(--teal));
+    opacity: 0.85;
+  }
+
+  /* Warm shadow card lift */
+  .card-lift {
+    transition: transform var(--dur-base) var(--ease-out),
+                box-shadow var(--dur-base) var(--ease-out);
+  }
+  .card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 4px 8px  hsl(var(--bark) / 0.08),
+      0 12px 28px hsl(var(--bark) / 0.06),
+      0 24px 48px hsl(var(--peach) / 0.10);
+  }
+
+  /* Glass — frosted light */
+  .glass {
+    background: hsl(var(--pearl) / 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid hsl(var(--dusk) / 0.45);
+  }
+}
+
+@layer utilities {
+  .font-display  { font-family: var(--font-display); }
+  .font-mono-ku  { font-family: var(--font-mono); }
+
+  /* Warm text gradient */
+  .text-warm {
+    background: linear-gradient(120deg, hsl(var(--bark)), hsl(var(--peach)));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Glassy card surface */
-  .glass {
-    background: hsl(var(--hollow) / 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid hsl(var(--veil) / 0.6);
-  }
-
-  /* Ember glow on hover */
-  .glow-ember {
-    transition: box-shadow var(--dur-base) var(--ease-out);
-  }
-  .glow-ember:hover {
-    box-shadow:
-      0 0 0 1px hsl(var(--ember) / 0.3),
-      0 8px 32px -8px hsl(var(--ember) / 0.25);
-  }
-}
-
-@layer utilities {
-  .animate-fade-in  { animation: fade-in  0.4s var(--ease-out) both; }
-  .animate-slide-up { animation: slide-up 0.5s var(--ease-out) both; }
+  .animate-fade-in  { animation: fade-in  0.5s var(--ease-out) both; }
+  .animate-slide-up { animation: slide-up 0.6s var(--ease-out) both; }
 
   @keyframes fade-in {
     from { opacity: 0; }
     to   { opacity: 1; }
   }
   @keyframes slide-up {
-    from { opacity: 0; transform: translateY(28px); }
+    from { opacity: 0; transform: translateY(24px); }
     to   { opacity: 1; transform: translateY(0); }
   }
   @keyframes shimmer {

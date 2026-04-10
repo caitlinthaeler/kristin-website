@@ -39,7 +39,7 @@ function Thumbnail({ item, index, onClick }: ThumbnailProps) {
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: (index % 6) * 0.05 }}
       onClick={onClick}
-      className={`${getCellClass(index)} group relative overflow-hidden rounded-lg bg-hollow focus-visible:ring-2 focus-visible:ring-ring`}
+      className={`${getCellClass(index)} group relative overflow-hidden rounded-lg bg-surface focus-visible:ring-2 focus-visible:ring-ring`}
     >
       {isVideo(item.filename) ? (
         <video
@@ -61,9 +61,9 @@ function Thumbnail({ item, index, onClick }: ThumbnailProps) {
       )}
 
       {/* Overlay with title on hover */}
-      <div className="absolute inset-0 bg-gradient-to-t from-void/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+      <div className="absolute inset-0 bg-linear-to-t from-char/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
         {item.title && (
-          <p className="text-xs text-cream font-medium line-clamp-2">{item.title}</p>
+          <p className="text-xs text-white/90 font-semibold line-clamp-2">{item.title}</p>
         )}
       </div>
 
@@ -81,8 +81,14 @@ export default function AnimationsGallery() {
 
   useEffect(() => {
     fetch('/api/animations')
-      .then((r) => r.json() as Promise<Media[]>)
-      .then((data) => { setAnimations(data); setLoading(false) })
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json() as Promise<Media[]>
+      })
+      .then((data) => {
+        setAnimations(Array.isArray(data) ? data : [])
+        setLoading(false)
+      })
       .catch(() => { setError('Failed to load animations.'); setLoading(false) })
   }, [])
 
