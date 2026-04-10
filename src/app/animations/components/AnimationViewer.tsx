@@ -77,14 +77,14 @@ export default function AnimationViewer({ animations, initialIndex, onClose }: P
                   autoPlay
                   loop
                   playsInline
-                  className="max-h-[65vh] max-w-[88vw] rounded-xl shadow-2xl shadow-black/60"
+                  className="max-h-[65vh] max-w-[88vw] shadow-2xl shadow-black/60"
                 />
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={r2url(item.filename)}
                   alt={item.title ?? ''}
-                  className="max-h-[65vh] max-w-[88vw] object-contain rounded-xl shadow-2xl shadow-black/60"
+                  className="max-h-[65vh] max-w-[88vw] object-contain shadow-2xl shadow-black/60"
                 />
               )}
             </motion.div>

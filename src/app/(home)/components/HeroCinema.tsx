@@ -67,7 +67,7 @@ export default function HeroCinema({ filmSrc, filmTitle }: Props) {
         className="relative z-10 w-full max-w-4xl px-4 md:px-8"
       >
         {/* Label */}
-        <div className="flex items-center justify-between px-3 py-2 rounded-t-xl bg-surface border border-b-0 border-border/40">
+        <div className="flex items-center justify-between px-3 py-2 bg-surface">
           <div className="flex items-center gap-2">
             <motion.span
               animate={{ opacity: [1, 0.35, 1] }}
@@ -80,7 +80,7 @@ export default function HeroCinema({ filmSrc, filmTitle }: Props) {
         </div>
 
         {/* Video */}
-        <div className="border border-t-0 border-border/40 rounded-b-xl overflow-hidden bg-surface">
+        <div className="overflow-hidden bg-surface">
           <video
             src={r2url(filmSrc)}
             controls
@@ -101,7 +101,7 @@ export default function HeroCinema({ filmSrc, filmTitle }: Props) {
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
-          className="w-px h-6 bg-linear-to-b from-primary/50 to-transparent"
+          className="w-2 h-2 rounded-full bg-primary/50"
         />
       </motion.div>
     </section>

@@ -108,8 +108,6 @@ export default function PortfolioGrid() {
                   />
                   {/* Scrim */}
                   <div className="absolute inset-0 bg-linear-to-t from-bark/80 via-bark/15 to-transparent" />
-                  {/* Peach bottom line on hover */}
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-primary/70 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center" />
 
                   {/* Label — slides up on hover */}
                   <div className="absolute bottom-0 left-0 p-5 translate-y-1 group-hover:translate-y-0 transition-transform duration-300">

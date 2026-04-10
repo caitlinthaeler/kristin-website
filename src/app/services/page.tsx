@@ -4,7 +4,7 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen pt-24 pb-20 px-6">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl md:text-5xl font-bold mb-4">Services</h1>
+        <h1 className="text-2xl font-black tracking-tight text-foreground mb-4">Services</h1>
         <p className="text-muted mb-12">Commission offerings and freelance work — coming soon.</p>
 
         <div className="grid md:grid-cols-2 gap-6">

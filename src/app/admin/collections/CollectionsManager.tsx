@@ -6,6 +6,7 @@ import { input, primaryBtn, ghostBtn, rowBtn } from '../components/adminStyles'
 import Field from '../components/Field'
 import Modal from '../components/Modal'
 import { r2url, isVideo } from '@/lib/r2'
+import MediaPicker from '../components/MediaPicker'
 
 export default function CollectionsManager() {
   const [collections, setCollections] = useState<Collection[]>([])
@@ -194,20 +195,15 @@ function CollectionForm({
 
 function CollectionMediaEditor({ collectionId, onClose }: { collectionId: number; onClose: () => void }) {
   const [collectionMedia, setCollectionMedia] = useState<Media[]>([])
-  const [allMedia, setAllMedia] = useState<Media[]>([])
   const [loading, setLoading] = useState(true)
-  const [search, setSearch] = useState('')
   const [adding, setAdding] = useState(false)
 
   const load = useCallback(() => {
     setLoading(true)
-    Promise.all([
-      fetch(`/api/admin/collections/${collectionId}/media`).then((r) => r.json()) as Promise<Media[]>,
-      fetch('/api/admin/media').then((r) => r.json()) as Promise<Media[]>,
-    ])
-      .then(([cm, am]) => {
+    fetch(`/api/admin/collections/${collectionId}/media`)
+      .then((r) => r.json() as Promise<Media[]>)
+      .then((cm) => {
         setCollectionMedia(Array.isArray(cm) ? cm : [])
-        setAllMedia(Array.isArray(am) ? am : [])
         setLoading(false)
       })
       .catch(() => setLoading(false))
@@ -216,11 +212,6 @@ function CollectionMediaEditor({ collectionId, onClose }: { collectionId: number
   useEffect(() => { load() }, [load])
 
   const inCollection = new Set(collectionMedia.map((m) => m.id))
-  const available = allMedia.filter(
-    (m) => !inCollection.has(m.id) && (
-      !search || (m.title ?? m.filename).toLowerCase().includes(search.toLowerCase())
-    )
-  )
 
   async function addMedia(ids: number[]) {
     setAdding(true)
@@ -283,38 +274,13 @@ function CollectionMediaEditor({ collectionId, onClose }: { collectionId: number
       {/* Add media section */}
       <div>
         <h4 className="text-xs font-semibold text-muted uppercase tracking-wide mb-2">Add Media</h4>
-        <input
-          className={`${input} mb-3`}
-          placeholder="Search media…"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+        <MediaPicker
+          multi
+          excludeIds={inCollection}
+          onSelect={(media) => {
+            addMedia(media.map((m) => m.id))
+          }}
         />
-        {available.length === 0 ? (
-          <p className="text-sm text-muted">No matching media available.</p>
-        ) : (
-          <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 max-h-60 overflow-y-auto">
-            {available.slice(0, 40).map((m) => (
-              <button
-                key={m.id}
-                onClick={() => addMedia([m.id])}
-                disabled={adding}
-                className="group relative aspect-square rounded-lg overflow-hidden bg-surface border border-border hover:border-primary transition-colors cursor-pointer"
-              >
-                {isVideo(m.filename) ? (
-                  <video src={r2url(m.filename)} className="w-full h-full object-cover" muted preload="metadata" />
-                ) : (
-                  <img src={r2url(m.thumbnail ?? m.filename)} alt={m.title ?? ''} className="w-full h-full object-cover" />
-                )}
-                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors flex items-center justify-center">
-                  <span className="text-white text-lg font-bold opacity-0 group-hover:opacity-100 drop-shadow">+</span>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 bg-overlay/60 text-[10px] text-white px-1.5 py-0.5 truncate">
-                  {m.title ?? m.filename.split('/').pop()}
-                </div>
-              </button>
-            ))}
-          </div>
-        )}
       </div>
 
       <div className="pt-2 border-t border-border">

@@ -9,7 +9,6 @@ import type { Media } from '@/types'
 function FilmSkeleton() {
   return (
     <div className="mb-20">
-      <div className="h-px bg-border/30 mb-8" />
       <div className="aspect-video w-full skeleton mb-6" />
       <div className="h-6 w-64 skeleton mb-3" />
       <div className="h-4 w-full skeleton mb-2" />
@@ -101,11 +100,8 @@ function FilmEntry({ film }: FilmEntryProps) {
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className="relative mb-24"
     >
-      {/* Divider */}
-      <div className="h-px bg-border/30 mb-8" />
-
       {/* Video — full width, cinematic */}
-      <div className="relative w-full bg-surface rounded-xl overflow-hidden mb-6">
+      <div className="relative w-full bg-surface overflow-hidden mb-6">
         <FilmVideo film={film} />
       </div>
 

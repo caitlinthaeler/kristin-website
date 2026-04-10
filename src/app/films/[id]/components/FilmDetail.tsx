@@ -66,7 +66,6 @@ export default function FilmDetail({ id }: Props) {
   if (loading) {
     return (
       <div>
-        <div className="h-px bg-border/30 mb-8" />
         <div className="aspect-video w-full skeleton mb-6" />
         <div className="h-7 w-80 skeleton mb-3" />
         <div className="h-4 w-full skeleton mb-2" />
@@ -101,11 +100,8 @@ export default function FilmDetail({ id }: Props) {
         All Films
       </Link>
 
-      {/* Divider */}
-      <div className="h-px bg-border/30 mb-8" />
-
       {/* Video */}
-      <div className="relative w-full bg-surface rounded-xl overflow-hidden mb-8 shadow-sm">
+      <div className="relative w-full bg-surface overflow-hidden mb-8 shadow-sm">
         {isVideo(film.filename) ? (
           <video
             src={src}
@@ -138,7 +134,7 @@ export default function FilmDetail({ id }: Props) {
       </div>
 
       {/* CTA */}
-      <div className="border-t border-border/30 pt-10">
+      <div className="pt-10">
         <p className="text-muted text-sm mb-4">Interested in collaborating or discussing this project?</p>
         <Link
           href="/about#contact"

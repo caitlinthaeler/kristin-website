@@ -18,8 +18,6 @@ export default function CommissionCta() {
         className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-full pointer-events-none"
         style={{ background: 'radial-gradient(ellipse 55% 80% at 50% 50%, hsl(var(--peach) / 0.07), transparent 70%)' }}
       />
-      {/* Top divider */}
-      <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-border/40 to-transparent" />
 
       <div ref={ref} className="relative max-w-2xl mx-auto text-center">
 

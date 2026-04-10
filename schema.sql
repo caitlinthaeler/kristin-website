@@ -152,3 +152,22 @@ INSERT OR IGNORE INTO home_sections (section_key, label, title, subtitle, sort_o
   ('portfolio_grid', 'Portfolio Grid',          NULL,                NULL,                                      1),
   ('about_teaser',   'About Teaser',            NULL,                NULL,                                      2),
   ('commission_cta', 'Commission / Hire Me CTA', NULL,               NULL,                                      3);
+
+-- ─── Film sections (rich content blocks per film) ─────────────────────────────
+CREATE TABLE IF NOT EXISTS film_sections (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  film_id INTEGER NOT NULL REFERENCES media(id) ON DELETE CASCADE,
+  title TEXT,
+  description TEXT,
+  sort_order INTEGER NOT NULL DEFAULT 0,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- Link media to film sections (many-to-many, e.g. concept art, backgrounds)
+CREATE TABLE IF NOT EXISTS film_section_media (
+  section_id INTEGER NOT NULL REFERENCES film_sections(id) ON DELETE CASCADE,
+  media_id INTEGER NOT NULL REFERENCES media(id) ON DELETE CASCADE,
+  sort_order INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (section_id, media_id)
+);

@@ -76,9 +76,9 @@ function GalleryItem({ item, index }: ItemProps) {
           <div className="max-w-3xl w-full" onClick={(e) => e.stopPropagation()}>
             {isImage(item.filename) ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={src} alt={item.title ?? ''} className="w-full rounded-xl" />
+              <img src={src} alt={item.title ?? ''} className="w-full" />
             ) : (
-              <video src={src} controls autoPlay className="w-full rounded-xl" />
+              <video src={src} controls autoPlay className="w-full" />
             )}
             {(item.title || item.description) && (
               <div className="mt-4 text-white">

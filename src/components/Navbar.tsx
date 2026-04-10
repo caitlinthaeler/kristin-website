@@ -59,10 +59,10 @@ const PANELS: Record<string, PanelData> = {
   'About Me': {
     type: 'cards',
     cards: [
-      { label: 'About & Bio',   desc: 'Story, portrait & resume',  href: '/about',          color: 'bg-primary/8' },
-      { label: 'Skills',        desc: 'Software & experience',      href: '/skills',         color: 'bg-secondary/8' },
-      { label: 'Services',      desc: 'Freelance & commission',     href: '/services',       color: 'bg-accent/15' },
-      { label: 'Contact Me →', desc: 'Say hello',                  href: '/about#contact',  color: 'bg-primary/12' },
+      { label: 'About & Bio',   desc: 'Story, portrait & resume',  href: '/about',          color: 'bg-cream/8' },
+      { label: 'Skills',        desc: 'Software & experience',      href: '/skills',         color: 'bg-cream/8' },
+      { label: 'Services',      desc: 'Freelance & commission',     href: '/services',       color: 'bg-cream/8' },
+      { label: 'Contact Me →', desc: 'Say hello',                  href: '/about#contact',  color: 'bg-cream/8' },
     ],
   },
 }
@@ -325,8 +325,6 @@ export default function Navbar() {
             {panel.type === 'cards' && (
               <PanelCards content={panel} onClose={() => setOpen(null)} />
             )}
-            {/* Subtle peach accent line at bottom */}
-            <div className="h-[2px] bg-linear-to-r from-transparent via-primary/25 to-transparent" />
           </motion.div>
         )}
       </AnimatePresence>
@@ -346,7 +344,7 @@ export default function Navbar() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className={`block py-3 text-base font-bold transition-colors border-b border-cream/10 last:border-0 ${
+                  className={`block py-3 text-base font-bold transition-colors last:border-0 ${
                     isActive(item.href) ? 'text-primary' : 'text-cream'
                   }`}
                   onClick={() => setMobileOpen(false)}

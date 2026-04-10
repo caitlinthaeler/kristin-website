@@ -7,7 +7,7 @@ import MagneticWrapper from '@/components/ui/MagneticWrapper'
 
 export default function AboutTeaser() {
   return (
-    <section className="px-8 md:px-16 py-24 md:py-32 border-t border-border/20">
+    <section className="px-8 md:px-16 py-24 md:py-32">
       <div className="max-w-6xl mx-auto grid md:grid-cols-[1fr_380px] gap-16 lg:gap-24 items-center">
 
         {/* Left — text */}
@@ -30,14 +30,6 @@ export default function AboutTeaser() {
               each frame a brushstroke.&rdquo;
             </blockquote>
           </FadeIn>
-
-          <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            whileInView={{ scaleX: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="w-12 h-px bg-primary/50 mt-7 origin-left"
-          />
 
           <motion.p
             initial={{ opacity: 0, y: 14 }}
@@ -66,7 +58,7 @@ export default function AboutTeaser() {
 
         {/* Right — portrait placeholder */}
         <FadeIn direction="right" delay={0.15}>
-          <div className="aspect-3/4 rounded-2xl overflow-hidden bg-surface relative">
+          <div className="aspect-3/4 overflow-hidden bg-surface relative">
             <div
               className="absolute inset-0"
               style={{ background: 'linear-gradient(145deg, hsl(var(--pearl)), hsl(var(--fog)))' }}

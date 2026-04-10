@@ -7,8 +7,8 @@ export default function InstagramPage() {
   return (
     <div className="min-h-screen pt-24 pb-20 px-6">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl md:text-5xl font-bold mb-4">Instagram</h1>
-        <p className="text-[var(--text-muted)] mb-12">@firresketches</p>
+        <h1 className="text-2xl font-black tracking-tight text-foreground mb-4">Instagram</h1>
+        <p className="text-muted mb-12">@firresketches</p>
 
         {/* behold.so embed */}
         <div

@@ -104,3 +104,19 @@ export interface HomeSection {
   sort_order: number
   updated_at: string
 }
+
+export interface FilmSection {
+  id: number
+  film_id: number
+  title: string | null
+  description: string | null
+  sort_order: number
+  created_at: string
+  updated_at: string
+}
+
+export interface FilmSectionMedia {
+  section_id: number
+  media_id: number
+  sort_order: number
+}

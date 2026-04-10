@@ -32,12 +32,7 @@ function LinkedInIcon() {
 
 export default function Footer() {
   return (
-    <footer className="relative bg-bark border-t border-cream/10 overflow-hidden">
-      {/* Soft peach top accent */}
-      <div
-        className="absolute inset-x-0 top-0 h-px pointer-events-none"
-        style={{ background: 'linear-gradient(90deg, transparent, hsl(var(--peach) / 0.4), transparent)' }}
-      />
+    <footer className="relative bg-bark overflow-hidden">
 
       <div className="max-w-6xl mx-auto px-6 py-14 grid md:grid-cols-[1fr_auto] gap-10 items-end">
 
@@ -76,7 +71,7 @@ export default function Footer() {
               <InstagramIcon />
               <span>@firresketches</span>
             </a>
-            <span className="w-px h-3 bg-cream/20" />
+
             <a
               href="https://linkedin.com/in/kristinthaeler"
               target="_blank"
@@ -92,7 +87,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-cream/10 px-6 py-4 max-w-6xl mx-auto flex items-center justify-between">
+      <div className="px-6 py-4 max-w-6xl mx-auto flex items-center justify-between">
         <p className="text-[11px] text-cream/60">
           © {new Date().getFullYear()} Kristin Thaeler
         </p>

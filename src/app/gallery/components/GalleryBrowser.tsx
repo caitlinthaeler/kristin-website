@@ -84,7 +84,7 @@ function Lightbox({ item, onClose }: { item: Media; onClose: () => void }) {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.93, opacity: 0 }}
         transition={{ duration: 0.22 }}
-        className="max-w-4xl w-full max-h-[90dvh] overflow-hidden rounded-xl shadow-2xl"
+        className="max-w-4xl w-full max-h-[90dvh] overflow-hidden shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {isVideo(item.filename) ? (
