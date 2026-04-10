@@ -25,18 +25,19 @@ the artist's current portfolio is located at https://kristinthaeler.weebly.com/a
 - the navigation should feel intuitive, flowy, and seamless. Focus on presenting and emphasizing the content. think about the user's experience as the user scrolls through a page, and consider what belongs or doesnt belong on a single page.
 - use gallery components like carousels, collage style, and any other components you can think of. 
 - use skeleton ui if components/media are loading. make sure any videos like the .mp4 or .mov medias have thumbnails
+- sans serif font
+- animator/painter artsy vibe
+- color palette is peach, brown torquoise, and white
+- use reactbits.dev and uiverse.io for unique components that matches the website's painter/artsy theme
 
 ## things to avoid
 - avoid generic shapes, borders, color combos, etc. avoid the generic panels with thin outline generic ui and avoid the compoent single side border coloring.
 - avoid cognitive overload. this is an artist portfolio, so unless its intentionally a gallery or collection of images, the content being shown to the user should feel intentional and focused on a specific piece of content.
-
-## current tech stack
-- jekyll markdown
-- cloudeflare R2 bucket for storage of animations/images throughout the app
-- deployed on github pages, committing and pushing updates prod instantly
+- avoid ai startup vibes
+- avoid futuristic techy vibes
 
 
-## tech stack (current)
+## tech stack
 - next.js 15 (app router), typescript, react 19
 - deployed on cloudflare pages
 - cloudflare R2 (via r2-worker) for all media storage
@@ -48,19 +49,27 @@ the artist's current portfolio is located at https://kristinthaeler.weebly.com/a
 ## styling
 - tailwind css v4 (css-based config in globals.css, no tailwind.config.ts)
 - globals.css uses: @layer theme → @theme inline → @layer base → @layer components
-- HSL palette: ember (primary/accent), gold (secondary), ink/dusk/smoke/ash/haze/mist (dark scale)
+- HSL palette (light warm theme): peach (primary), teal (secondary), blush (accent) on cream/pearl/fog/dusk/stone/bark/earth scale
 - use semantic tailwind tokens only: bg-background, text-foreground, bg-surface, text-muted, bg-primary, text-primary-foreground, border-border, etc.
-- never use hardcoded hex/rgb/var(--x) inline in components — always use the token names
+- never use hardcoded hex/rgb/var(--x) inline in components — always use the semantic token names
 - framer-motion for animations
-- css component libraries available: shadcn/ui, reactbits.dev, magicui.design, uiverse.io
-- css modules go in a customStyles/ folder for component-specific styles
-- page-specific components live in the same folder as the page (colocation), shared components in src/components/
+- css component libraries available: shadcn/ui, reactbits.dev, uiverse.io, magicui.design
+- css modules go in a customStyles/ folder ONLY for styles that cannot be done in tailwind — most component styles should use tailwind directly
+- page-specific components live in a components/ subfolder colocated with the page (e.g. src/app/films/components/). shared/reusable components go in src/components/ or src/components/ui/
 
 ## file structure
 - all source under src/: src/app, src/components, src/lib, src/types, src/hooks
 - import alias: @/* → ./src/* (configured in tsconfig.json)
 - page.tsx files must NOT have 'use client' — client rendering goes in components only
+- colocation: page-specific components live in src/app/[page]/components/, shared components in src/components/, UI primitives in src/components/ui/
+- admin route components (e.g. MediaManager) live alongside their page.tsx since each route only has one manager component
 
+## admin
+- /admin/* is protected by Cloudflare Access — no custom auth needed
+- all admin CRUD routes are under src/app/api/admin/
+- admin UI components colocated with their route page (e.g. src/app/admin/media/MediaManager.tsx)
+- D1 database accessed via getRequestContext().env.DB in all API routes
+- all admin API routes must have export const runtime = 'edge'
 
 ## follow these best practices
 - rate limit messaging in the contact section

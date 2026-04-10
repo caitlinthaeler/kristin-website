@@ -1,0 +1,6 @@
+export const input = 'w-full bg-background border border-border rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted focus:outline-none focus:ring-1 focus:ring-primary'
+export const primaryBtn = 'px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/85 disabled:opacity-50 transition-colors'
+export const ghostBtn = 'px-4 py-2 rounded-lg border border-border text-sm text-foreground hover:bg-surface transition-colors'
+export const rowBtn = 'text-xs text-muted hover:text-foreground transition-colors'
+export const th = 'px-4 py-3 text-xs font-semibold uppercase tracking-wide'
+export const td = 'px-4 py-3'

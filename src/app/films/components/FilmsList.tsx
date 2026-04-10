@@ -8,7 +8,7 @@ import type { Media } from '@/types'
 function FilmSkeleton() {
   return (
     <div className="mb-24">
-      <div className="h-px bg-sepia mb-10" />
+      <div className="h-px bg-dusk/40 mb-10" />
       <div className="h-4 w-20 skeleton mb-6" />
       <div className="aspect-video w-full skeleton mb-8" />
       <div className="h-8 w-64 skeleton mb-4" />
@@ -35,12 +35,12 @@ function FilmEntry({ film, index }: FilmEntryProps) {
       className="relative mb-28"
     >
       {/* Divider */}
-      <div className="h-px bg-linear-to-r from-primary/40 via-sepia to-transparent mb-10" />
+      <div className="h-px bg-linear-to-r from-primary/50 via-dusk/40 to-transparent mb-10" />
 
       {/* Film number */}
       <div className="flex items-baseline gap-4 mb-6">
         <span className="text-[11px] tracking-[0.2em] uppercase text-primary font-semibold">Film</span>
-        <span className="text-6xl md:text-8xl font-black text-sepia/50 leading-none select-none font-display">{num}</span>
+        <span className="text-6xl md:text-8xl font-black text-dusk/60 leading-none select-none">{num}</span>
       </div>
 
       {/* Video — full width, cinematic */}
