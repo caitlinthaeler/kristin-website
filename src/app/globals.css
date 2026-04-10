@@ -55,7 +55,7 @@
     --accent-foreground:      var(--earth);
     --card:                   var(--pearl);
     --card-foreground:        var(--bark);
-    --overlay:                var(--earth);
+    --overlay:                var(--bark);
     --destructive:            var(--danger);
     --destructive-foreground: var(--white);
     --success:                var(--ok);

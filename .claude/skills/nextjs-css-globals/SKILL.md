@@ -1,3 +1,8 @@
+---
+name: nextjs-css-globals
+description: best practices for setting up global styles and using css modules for component specific styles in a next.js project
+---
+
 ## styling structure for nextjs
 - in the globals.css file, set up the base styles for the website, including typography, color palette, and any global layout styles. this is where you can define the overall look and feel of the website, such as font choices, base font sizes, line heights, and color variables. have a small hsl brand color palette that is used to derive all colors for the website. so background, foreground, border, primary, secondary, etc. all derive from this palette. all the colors should be in hsl format to allow for easy manipulation of the colors using css variables and tailwind utilities. the color palette should be cohesive and reflect the artist's aesthetic and personality.
 - use css react component libraries like shadcn/ui, reactbits.dev, magicui.design, uiverse.io, framer motion, and others to use in the website. customize these pre-built components as needed to fit the website's design and aesthetic. 

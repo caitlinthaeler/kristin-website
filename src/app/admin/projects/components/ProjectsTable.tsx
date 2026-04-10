@@ -7,9 +7,10 @@ interface Props {
   items: Project[]
   onEdit: (item: Project) => void
   onDelete: (id: number) => void
+  onSections: (item: Project) => void
 }
 
-export default function ProjectsTable({ items, onEdit, onDelete }: Props) {
+export default function ProjectsTable({ items, onEdit, onDelete, onSections }: Props) {
   if (items.length === 0) return <p className="text-muted text-sm">No projects yet.</p>
 
   return (
@@ -36,6 +37,7 @@ export default function ProjectsTable({ items, onEdit, onDelete }: Props) {
               </td>
               <td className={`${td} text-right`}>
                 <div className="flex items-center justify-end gap-2">
+                  <button onClick={() => onSections(item)} className={rowBtn}>Sections</button>
                   <button onClick={() => onEdit(item)} className={rowBtn}>Edit</button>
                   <button onClick={() => onDelete(item.id)} className="text-destructive hover:text-destructive/70 text-xs transition-colors">Delete</button>
                 </div>

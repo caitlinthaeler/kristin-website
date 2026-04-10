@@ -78,7 +78,7 @@ function PanelImage({
           className="absolute inset-0 bg-cover bg-center scale-100 hover:scale-105 transition-transform duration-500"
           style={{ backgroundImage: `url(${content.image})` }}
         />
-        <div className="absolute inset-0 bg-linear-to-t from-earth/60 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-bark/60 to-transparent" />
         <p className="absolute bottom-3 left-3 text-xs font-black text-white drop-shadow">{label}</p>
       </div>
 
@@ -137,7 +137,7 @@ function PanelFilms({
           className="absolute inset-0 bg-cover bg-center scale-100 hover:scale-105 transition-transform duration-500"
           style={{ backgroundImage: `url(${content.image})` }}
         />
-        <div className="absolute inset-0 bg-linear-to-t from-earth/60 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-bark/60 to-transparent" />
         <p className="absolute bottom-3 left-3 text-xs font-black text-white drop-shadow">Films</p>
       </div>
       <div>
@@ -263,7 +263,7 @@ export default function Navbar() {
                   className={`px-3 py-1.5 rounded-full text-sm font-semibold transition-all duration-150 ${
                     isActive(item.href) || open === item.label
                       ? 'text-primary bg-primary/10'
-                      : 'text-cream/70 hover:text-cream hover:bg-earth'
+                      : 'text-cream/70 hover:text-cream hover:bg-cream/10'
                   }`}
                 >
                   {item.label}
@@ -282,7 +282,7 @@ export default function Navbar() {
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden p-1.5 rounded-md text-cream/60 hover:text-cream hover:bg-earth/60 transition-colors"
+            className="md:hidden p-1.5 rounded-md text-cream/60 hover:text-cream hover:bg-cream/10 transition-colors"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -308,7 +308,7 @@ export default function Navbar() {
             animate={{ opacity: 1, clipPath: 'inset(0 0 0% 0)' }}
             exit={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden md:block absolute left-0 right-0 top-full bg-bark/97 backdrop-blur-md border-b border-cream/10 shadow-lg shadow-earth/20"
+            className="hidden md:block absolute left-0 right-0 top-full bg-bark/97 backdrop-blur-md border-b border-cream/10 shadow-lg shadow-bark/30"
           >
             {panel.type === 'image' && (
               <PanelImage label={open} content={panel} onClose={() => setOpen(null)} pathname={pathname} />

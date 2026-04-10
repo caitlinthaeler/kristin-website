@@ -69,7 +69,7 @@ function Lightbox({ item, onClose }: { item: Media; onClose: () => void }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.18 }}
-      className="fixed inset-0 z-50 bg-earth/85 backdrop-blur-sm flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 bg-bark/85 backdrop-blur-sm flex items-center justify-center p-4"
       onClick={onClose}
     >
       <button
@@ -88,10 +88,10 @@ function Lightbox({ item, onClose }: { item: Media; onClose: () => void }) {
         onClick={(e) => e.stopPropagation()}
       >
         {isVideo(item.filename) ? (
-          <video src={src} controls autoPlay playsInline className="w-full max-h-[80dvh] object-contain bg-earth" />
+          <video src={src} controls autoPlay playsInline className="w-full max-h-[80dvh] object-contain bg-bark" />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={src} alt={item.title ?? ''} className="w-full max-h-[80dvh] object-contain bg-earth" />
+          <img src={src} alt={item.title ?? ''} className="w-full max-h-[80dvh] object-contain bg-bark" />
         )}
         {item.title && (
           <div className="bg-background px-5 py-3">
@@ -132,7 +132,7 @@ function GalleryItem({ item, onClick }: { item: Media; onClick: () => void }) {
             </div>
           )}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-            <div className="bg-earth/60 rounded-full p-3">
+            <div className="bg-bark/60 rounded-full p-3">
               <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" />
               </svg>
@@ -149,7 +149,7 @@ function GalleryItem({ item, onClick }: { item: Media; onClick: () => void }) {
         />
       )}
       {/* Hover overlay */}
-      <div className="absolute inset-0 bg-linear-to-t from-earth/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+      <div className="absolute inset-0 bg-linear-to-t from-bark/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200">
         {item.title && (
           <p className="absolute bottom-2 left-3 right-3 text-xs font-semibold text-white truncate">
             {item.title}
@@ -204,8 +204,8 @@ export default function GalleryBrowser() {
   // Load collections
   useEffect(() => {
     fetch('/api/collections')
-      .then((r) => (r.ok ? r.json() : [] as Collection[]))
-      .then((data: Collection[]) => setCollections(buildTree(Array.isArray(data) ? data : [])))
+      .then((r) => (r.ok ? (r.json() as Promise<Collection[]>) : ([] as Collection[])))
+      .then((data) => setCollections(buildTree(Array.isArray(data) ? data : [])))
       .catch(() => {})
   }, [])
 

@@ -61,7 +61,7 @@ function Thumbnail({ item, index, onClick }: ThumbnailProps) {
       )}
 
       {/* Overlay with title on hover */}
-      <div className="absolute inset-0 bg-linear-to-t from-earth/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+      <div className="absolute inset-0 bg-linear-to-t from-bark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
         {item.title && (
           <p className="text-xs text-white/90 font-semibold line-clamp-2">{item.title}</p>
         )}

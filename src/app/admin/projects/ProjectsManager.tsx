@@ -6,6 +6,7 @@ import Modal from '../components/Modal'
 import { primaryBtn } from '../components/adminStyles'
 import ProjectForm, { type ProjectFormData } from './components/ProjectForm'
 import ProjectsTable from './components/ProjectsTable'
+import ProjectSectionsEditor from './components/ProjectSectionsEditor'
 
 const EMPTY: ProjectFormData = { title: '', description: null, thumbnail: null, hidden: false, sort_order: 0 }
 
@@ -15,6 +16,7 @@ export default function ProjectsManager() {
   const [editTarget, setEditTarget] = useState<Project | null>(null)
   const [showAdd, setShowAdd] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [sectionsProject, setSectionsProject] = useState<Project | null>(null)
 
   const load = useCallback(() => {
     setLoading(true)
@@ -61,7 +63,7 @@ export default function ProjectsManager() {
 
       {loading
         ? <div className="space-y-3">{Array.from({ length: 3 }).map((_, i) => <div key={i} className="h-16 skeleton rounded-xl" />)}</div>
-        : <ProjectsTable items={items} onEdit={setEditTarget} onDelete={handleDelete} />
+        : <ProjectsTable items={items} onEdit={setEditTarget} onDelete={handleDelete} onSections={setSectionsProject} />
       }
 
       {showAdd && (
@@ -77,6 +79,11 @@ export default function ProjectsManager() {
             onCancel={() => setEditTarget(null)}
             saving={saving}
           />
+        </Modal>
+      )}
+      {sectionsProject && (
+        <Modal title={`Sections — ${sectionsProject.title}`} onClose={() => setSectionsProject(null)} size="lg">
+          <ProjectSectionsEditor projectId={sectionsProject.id} onClose={() => setSectionsProject(null)} />
         </Modal>
       )}
     </div>
