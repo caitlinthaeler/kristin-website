@@ -7,9 +7,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 const NAV = [
   { label: 'Animations', href: '/animations' },
-  { label: 'Films',         href: '/films' },
-  { label: 'Life Drawings', href: '/life-drawings' },
-  { label: 'About Me',      href: '/about' },
+  { label: 'Films',      href: '/films' },
+  { label: 'Personal',   href: '/personal' },
+  { label: 'About Me',   href: '/about' },
 ]
 
 type ImagePanel = {
@@ -41,11 +41,14 @@ const PANELS: Record<string, PanelData> = {
     sub: 'Short films & productions',
     links: [{ label: 'View All Films', href: '/films' }],
   },
-  'Life Drawings': {
+  Personal: {
     type: 'image',
     image: '/ui/life-drawings-button.jpeg',
-    sub: 'Figure & observational drawing',
-    links: [{ label: 'View All', href: '/life-drawings' }],
+    sub: 'Images · Life drawings · Personal work',
+    links: [
+      { label: 'View All',      href: '/personal' },
+      { label: 'Life Drawings', href: '/personal?collection=life-drawings' },
+    ],
   },
   'About Me': {
     type: 'cards',
@@ -159,8 +162,10 @@ export default function Navbar() {
           <ul className="hidden md:flex items-center gap-0.5">
             {NAV.map((item) => (
               <li key={item.label}>
-                <button
+                <Link
+                  href={item.href}
                   onMouseEnter={() => setOpen(item.label)}
+                  onClick={() => setOpen(null)}
                   className={`px-3 py-1.5 rounded-full text-sm font-semibold transition-all duration-150 ${
                     isActive(item.href) || open === item.label
                       ? 'text-primary bg-primary/10'
@@ -168,7 +173,7 @@ export default function Navbar() {
                   }`}
                 >
                   {item.label}
-                </button>
+                </Link>
               </li>
             ))}
           </ul>

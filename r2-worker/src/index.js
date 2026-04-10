@@ -8,18 +8,27 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+const CORS_HEADERS = {
+	"Access-Control-Allow-Origin": "*",
+	"Access-Control-Allow-Methods": "GET, OPTIONS",
+	"Access-Control-Allow-Headers": "Content-Type, Range",
+	"Access-Control-Expose-Headers": "Content-Length, Content-Range, Accept-Ranges",
+};
+
 export default {
 	async fetch(request, env) {
 		const url = new URL(request.url);
 		const key = url.pathname.slice(1);
 
+		// CORS preflight
+		if (request.method === "OPTIONS") {
+			return new Response(null, { status: 204, headers: CORS_HEADERS });
+		}
+
 		switch (request.method) {
-			// case "PUT":
-			// 	await env.MY_BUCKET.put(key, request.body);
-			// 	return new Response(`Put ${key} successfully!`);
 			case "GET": {
 				if (!key) {
-						return new Response("Missing object key", { status: 400 });
+					return new Response("Missing object key", { status: 400, headers: CORS_HEADERS });
 				}
 
 				// Extract top-level folder from key (e.g. "animations/running.gif")
@@ -30,18 +39,13 @@ export default {
 				const object = await env.KRISTIN_BUCKET.get(fullKey);
 
 				if (object === null) {
-					return new Response("Object Not Found", { status: 404 });
+					return new Response("Object Not Found", { status: 404, headers: CORS_HEADERS });
 				}
 
-				const headers = new Headers();
+				const headers = new Headers(CORS_HEADERS);
 				object.writeHttpMetadata(headers);
 				headers.set("etag", object.httpEtag);
-
-				// Add CORS headers here: (add back if necessary)
-				// headers.set("Access-Control-Allow-Origin", "*"); // or your domain like "https://kristinthaeler.com"
-				// headers.set("Access-Control-Allow-Methods", "GET");
-				// headers.set("Access-Control-Allow-Headers", "Content-Type");
-
+				headers.set("Cache-Control", "public, max-age=31536000, immutable");
 
 				// Guess and set Content-Type if missing
 				if (!headers.has("Content-Type")) {
@@ -51,16 +55,11 @@ export default {
 
 				return new Response(object.body, { headers });
 			}
-			// case "DELETE":
-			// 	await env.MY_BUCKET.delete(key);
-			// 	return new Response("Deleted!");
 
 			default:
 				return new Response("Method Not Allowed", {
 					status: 405,
-					headers: {
-						Allow: "GET",
-					},
+					headers: { ...CORS_HEADERS, Allow: "GET, OPTIONS" },
 				});
 		}
 	},

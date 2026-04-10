@@ -52,8 +52,22 @@ export default function MediaManager() {
   }
 
   async function handleDelete(id: number) {
-    if (!confirm('Delete this media item? This cannot be undone.')) return
+    const item = items.find((i) => i.id === id)
+    if (!confirm(`Delete "${item?.title ?? item?.filename ?? 'this item'}"? This cannot be undone.`)) return
+
+    // Remove from D1
     await fetch(`/api/admin/media/${id}`, { method: 'DELETE' })
+
+    // Remove files from R2 (best-effort — ignore errors)
+    const keysToDelete = [item?.filename, item?.thumbnail].filter(Boolean) as string[]
+    for (const key of keysToDelete) {
+      fetch('/api/admin/upload', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key }),
+      }).catch(() => null)
+    }
+
     load()
   }
 
