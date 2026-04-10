@@ -1,5 +1,6 @@
 import FilmDetail from './components/FilmDetail'
 
+export const runtime = 'edge'
 export const metadata = { title: 'Film — Kristin Thaeler' }
 
 interface Props {
