@@ -104,10 +104,14 @@ CREATE TABLE IF NOT EXISTS achievements (
   sort_order INTEGER NOT NULL DEFAULT 0
 );
 
--- Instagram post visibility control
+-- Instagram curated posts (native embeds, admin-managed URLs)
 CREATE TABLE IF NOT EXISTS instagram_posts (
-  post_id TEXT PRIMARY KEY,      -- behold.so post ID
-  hidden INTEGER NOT NULL DEFAULT 0
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  url TEXT NOT NULL,              -- full Instagram post URL
+  caption TEXT,                   -- optional note for admin reference
+  hidden INTEGER NOT NULL DEFAULT 0,
+  sort_order INTEGER NOT NULL DEFAULT 0,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
 -- ─── Additional artist_info keys ──────────────────────────────────────────────

@@ -9,7 +9,7 @@ function Skeleton() {
   return (
     <div className="columns-2 sm:columns-3 md:columns-4 gap-3 space-y-3">
       {Array.from({ length: 8 }).map((_, i) => (
-        <div key={i} className="skeleton rounded-xl break-inside-avoid" style={{ height: `${140 + (i % 3) * 60}px` }} />
+        <div key={i} className="skeleton break-inside-avoid" style={{ height: `${140 + (i % 3) * 60}px` }} />
       ))}
     </div>
   )
@@ -31,7 +31,7 @@ function GalleryItem({ item, index }: ItemProps) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-40px' }}
         transition={{ duration: 0.4, delay: (index % 6) * 0.05, ease: [0.16, 1, 0.3, 1] }}
-        className="break-inside-avoid mb-3 rounded-xl overflow-hidden cursor-pointer group relative bg-surface"
+        className="break-inside-avoid mb-3 overflow-hidden cursor-pointer group relative bg-surface"
         onClick={() => setOpen(true)}
       >
         {isImage(item.filename) ? (

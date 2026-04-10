@@ -115,7 +115,7 @@ function GalleryItem({ item, onClick }: { item: Media; onClick: () => void }) {
       initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className="break-inside-avoid mb-3 group cursor-pointer relative rounded-lg overflow-hidden"
+      className="break-inside-avoid mb-3 group cursor-pointer relative overflow-hidden"
       onClick={onClick}
     >
       {isVideo(item.filename) ? (
@@ -338,7 +338,7 @@ export default function GalleryBrowser() {
         {loading ? (
           <div className="columns-2 sm:columns-3 md:columns-3 lg:columns-4 gap-3">
             {Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className={`break-inside-avoid mb-3 skeleton rounded-lg ${
+              <div key={i} className={`break-inside-avoid mb-3 skeleton ${
                 [70, 100, 80, 60, 110, 90][i % 6] ? '' : ''
               }`}
               style={{ height: [140, 200, 160, 120, 220, 180][i % 6] }}

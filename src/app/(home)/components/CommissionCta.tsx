@@ -7,7 +7,18 @@ import SketchButton from '@/components/ui/SketchButton'
 
 const HEADING_WORDS = ['create', 'something']
 
-export default function CommissionCta() {
+interface Props {
+  title?: string | null
+  body?: string | null
+  ctaLabel?: string | null
+  ctaHref?: string | null
+}
+
+export default function CommissionCta({
+  body,
+  ctaLabel = 'Get in Touch',
+  ctaHref = '/about#contact',
+}: Props) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
@@ -74,8 +85,7 @@ export default function CommissionCta() {
           transition={{ duration: 0.55, delay: 0.38 }}
           className="text-muted text-sm md:text-base leading-relaxed mb-10 max-w-sm mx-auto"
         >
-          Open for commissions and freelance animation work. From short clips to full productions —
-          reach out and let&apos;s bring your story to life.
+          {body || 'Open for commissions and freelance animation work. From short clips to full productions — reach out and let\'s bring your story to life.'}
         </motion.p>
 
         <motion.div
@@ -85,7 +95,7 @@ export default function CommissionCta() {
           className="flex flex-wrap items-center justify-center gap-4"
         >
           <MagneticWrapper>
-            <SketchButton href="/about#contact" size="lg">Get in Touch</SketchButton>
+            <SketchButton href={ctaHref ?? '/about#contact'} size="lg">{ctaLabel ?? 'Get in Touch'}</SketchButton>
           </MagneticWrapper>
           <MagneticWrapper>
             <SketchButton href="/services" variant="outline" size="lg">View Services</SketchButton>

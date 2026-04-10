@@ -1,7 +1,7 @@
-## migration
-if migrating from jekyll to nextjs, first set up the nextjs app and deploy it to github pages. then, start migrating the content from the jekyll app to the nextjs app. this will involve creating new pages and components in nextjs and copying over the content from the jekyll markdown files. make sure to also migrate any media files that are stored in the R2 bucket and update any links to those media files in the new nextjs app. test the new nextjs app thoroughly to ensure that all content is displayed correctly and that all features are working as intended before fully switching over from the jekyll app.
-
-there is no admin page as of now, so create this section. the ui and page layouts can be entirely rewritten.
+---
+name: nextjs-structure
+description: best practices for structuring a next.js project, including file organization, component structure. use when restructring part of the project or the user is asking to add/modify a feature that requires dependencies such as using a third party tool, look at the tech stack section to make sure the new dependencies are compatible with the existing tech stack and follow the best practices for next.js development. also if the user is adding pages or components, follow the file structure and styling structure outlined in this skill and the nextjs-css-globals skill. or if the user is asking to fix bugs in existing code, make sure to follow the best practices outlined in this skill and the nextjs-css-globals skill when making changes to the code. also make sure to keep the file structure and styling structure consistent with the rest of the project when making changes.
+---
 
 ## best practices for nextjs
 - use functional components and hooks for state management and side effects

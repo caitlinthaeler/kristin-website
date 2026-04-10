@@ -39,7 +39,7 @@ function Thumbnail({ item, index, onClick }: ThumbnailProps) {
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: (index % 6) * 0.05 }}
       onClick={onClick}
-      className={`${getCellClass(index)} group relative overflow-hidden rounded-lg bg-surface focus-visible:ring-2 focus-visible:ring-ring`}
+      className={`${getCellClass(index)} group relative overflow-hidden bg-surface focus-visible:ring-2 focus-visible:ring-ring`}
     >
       {isVideo(item.filename) ? (
         <video

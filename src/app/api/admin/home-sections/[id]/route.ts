@@ -32,3 +32,17 @@ export async function PUT(
     return Response.json({ error: e instanceof Error ? e.message : 'Failed' }, { status: 500 })
   }
 }
+
+export async function DELETE(
+  _req: Request,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  const { id } = await params
+  try {
+    const { env } = getRequestContext()
+    await env.DB.prepare('DELETE FROM home_sections WHERE id = ?').bind(id).run()
+    return Response.json({ ok: true })
+  } catch (e) {
+    return Response.json({ error: e instanceof Error ? e.message : 'Failed' }, { status: 500 })
+  }
+}

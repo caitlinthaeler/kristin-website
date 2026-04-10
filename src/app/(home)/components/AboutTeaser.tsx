@@ -5,7 +5,23 @@ import FadeIn from '@/components/FadeIn'
 import SketchButton from '@/components/ui/SketchButton'
 import MagneticWrapper from '@/components/ui/MagneticWrapper'
 
-export default function AboutTeaser() {
+interface Props {
+  title?: string | null
+  body?: string | null
+  ctaLabel?: string | null
+  ctaHref?: string | null
+}
+
+export default function AboutTeaser({
+  title,
+  body,
+  ctaLabel = 'Learn More',
+  ctaHref = '/about',
+}: Props) {
+
+  const quote = title || 'Storytelling through movement —\neach frame a brushstroke.'
+  const description = body || 'Kristin Thaeler is an animator and visual storyteller working under the name firresketches. Rooted in classical drawing and a love for expressive motion, her work explores character, emotion, and the quiet beauty of the in-between.'
+
   return (
     <section className="px-8 md:px-16 py-24 md:py-32">
       <div className="max-w-6xl mx-auto grid md:grid-cols-[1fr_380px] gap-16 lg:gap-24 items-center">
@@ -25,9 +41,8 @@ export default function AboutTeaser() {
           </div>
 
           <FadeIn clipReveal delay={0.1}>
-            <blockquote className="font-extrabold italic text-3xl md:text-4xl lg:text-[2.8rem] text-foreground leading-[1.18] tracking-tight">
-              &ldquo;Storytelling through movement —<br />
-              each frame a brushstroke.&rdquo;
+            <blockquote className="font-extrabold italic text-3xl md:text-4xl lg:text-[2.8rem] text-foreground leading-[1.18] tracking-tight whitespace-pre-line">
+              &ldquo;{quote}&rdquo;
             </blockquote>
           </FadeIn>
 
@@ -38,9 +53,7 @@ export default function AboutTeaser() {
             transition={{ duration: 0.55, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="mt-6 text-muted text-sm leading-relaxed max-w-md"
           >
-            Kristin Thaeler is an animator and visual storyteller working under the name{' '}
-            <em>firresketches</em>. Rooted in classical drawing and a love for expressive motion,
-            her work explores character, emotion, and the quiet beauty of the in-between.
+            {description}
           </motion.p>
 
           <motion.div
@@ -51,7 +64,7 @@ export default function AboutTeaser() {
             className="mt-8"
           >
             <MagneticWrapper>
-              <SketchButton href="/about" variant="outline" size="md">Learn More</SketchButton>
+              <SketchButton href={ctaHref ?? '/about'} variant="outline" size="md">{ctaLabel ?? 'Learn More'}</SketchButton>
             </MagneticWrapper>
           </motion.div>
         </FadeIn>

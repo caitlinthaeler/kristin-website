@@ -6,11 +6,22 @@ import SketchButton from '@/components/ui/SketchButton'
 import { r2url } from '@/lib/r2'
 
 interface Props {
-  filmSrc: string
-  filmTitle: string
+  filmSrc?: string
+  filmTitle?: string
+  title?: string | null
+  subtitle?: string | null
+  ctaLabel?: string | null
+  ctaHref?: string | null
 }
 
-export default function HeroCinema({ filmSrc, filmTitle }: Props) {
+export default function HeroCinema({
+  filmSrc,
+  filmTitle,
+  title = 'Kristin Thaeler',
+  subtitle = 'Animator · Storyteller · @firresketches',
+  ctaLabel = 'View Films',
+  ctaHref = '/films',
+}: Props) {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '18%'])
@@ -36,7 +47,7 @@ export default function HeroCinema({ filmSrc, filmTitle }: Props) {
           transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="font-black text-5xl md:text-6xl lg:text-7xl text-foreground tracking-tight leading-none whitespace-nowrap"
         >
-          Kristin Thaeler
+          {title}
         </motion.h1>
 
         <motion.p
@@ -45,7 +56,7 @@ export default function HeroCinema({ filmSrc, filmTitle }: Props) {
           transition={{ delay: 0.42, duration: 0.6 }}
           className="mt-3 text-muted text-sm md:text-base tracking-wide"
         >
-          Animator&nbsp;·&nbsp;Storyteller&nbsp;·&nbsp;@firresketches
+          {subtitle}
         </motion.p>
 
         <motion.div
@@ -54,7 +65,7 @@ export default function HeroCinema({ filmSrc, filmTitle }: Props) {
           transition={{ delay: 0.65, duration: 0.5 }}
           className="flex flex-wrap items-center justify-center gap-3 mt-7"
         >
-          <SketchButton href="/films" size="md">View Films</SketchButton>
+          <SketchButton href={ctaHref ?? '/films'} size="md">{ctaLabel ?? 'View Films'}</SketchButton>
           <SketchButton href="/about#contact" variant="outline" size="md">Hire Me</SketchButton>
         </motion.div>
       </motion.div>
@@ -76,17 +87,23 @@ export default function HeroCinema({ filmSrc, filmTitle }: Props) {
             />
             <span className="text-[10px] tracking-[0.18em] uppercase font-semibold text-muted">Featured</span>
           </div>
-          <span className="text-[11px] text-muted font-medium">{filmTitle}</span>
+          <span className="text-[11px] text-muted font-medium">{filmTitle ?? 'Featured'}</span>
         </div>
 
         {/* Video */}
         <div className="overflow-hidden bg-surface">
-          <video
-            src={r2url(filmSrc)}
-            controls
-            playsInline
-            className="w-full aspect-video object-cover"
-          />
+          {filmSrc ? (
+            <video
+              src={r2url(filmSrc)}
+              controls
+              playsInline
+              className="w-full aspect-video object-cover"
+            />
+          ) : (
+            <div className="w-full aspect-video bg-surface flex items-center justify-center">
+              <p className="text-muted text-sm">No featured media selected</p>
+            </div>
+          )}
         </div>
       </motion.div>
 

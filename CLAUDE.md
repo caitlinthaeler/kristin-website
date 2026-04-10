@@ -43,7 +43,7 @@ the artist's current portfolio is located at https://kristinthaeler.weebly.com/a
 - cloudflare R2 (via r2-worker) for all media storage
 - cloudflare D1 (sqlite) for all non-media data — see schema.sql
 - cloudflare access protecting /admin/* (no custom auth code needed — already authenticated by the time requests reach the app)
-- behold.so for embedding instagram posts
+- native Instagram oEmbed embeds for curated Instagram posts (admin-managed URLs)
 - @cloudflare/next-on-pages adapter for next.js + cloudflare pages
 
 ## styling
