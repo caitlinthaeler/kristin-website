@@ -71,4 +71,36 @@ export interface ArtistInfo {
   instagram_url: string
   linkedin_url: string
   featured_film: string
+  profile_picture: string
+  logo_type: 'text' | 'image'
+  logo_image: string
+}
+
+export type ProjectSectionType = 'text' | 'media' | 'gallery'
+
+export interface ProjectSection {
+  id: number
+  project_id: number
+  section_type: ProjectSectionType
+  title: string | null
+  content: string | null
+  media_id: number | null
+  sort_order: number
+  created_at: string
+  updated_at: string
+}
+
+export interface HomeSection {
+  id: number
+  section_key: string
+  label: string
+  title: string | null
+  subtitle: string | null
+  body: string | null
+  cta_label: string | null
+  cta_href: string | null
+  media_id: number | null
+  hidden: boolean
+  sort_order: number
+  updated_at: string
 }

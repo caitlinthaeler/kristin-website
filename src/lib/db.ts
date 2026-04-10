@@ -118,5 +118,8 @@ export async function getArtistInfo(db: D1Database): Promise<ArtistInfo> {
     instagram_url: map.instagram_url ?? '',
     linkedin_url: map.linkedin_url ?? '',
     featured_film: map.featured_film ?? '',
+    profile_picture: map.profile_picture ?? '',
+    logo_type: (map.logo_type as 'text' | 'image') ?? 'text',
+    logo_image: map.logo_image ?? '',
   }
 }

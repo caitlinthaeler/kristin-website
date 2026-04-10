@@ -109,3 +109,46 @@ CREATE TABLE IF NOT EXISTS instagram_posts (
   post_id TEXT PRIMARY KEY,      -- behold.so post ID
   hidden INTEGER NOT NULL DEFAULT 0
 );
+
+-- ─── Additional artist_info keys ──────────────────────────────────────────────
+INSERT OR IGNORE INTO artist_info (key, value) VALUES
+  ('profile_picture', ''),           -- R2 key for artist profile photo
+  ('logo_type', 'text'),             -- 'text' | 'image'
+  ('logo_image', '');                -- R2 key for logo image (only used when logo_type = 'image')
+
+-- ─── Project sections (rich content blocks per project) ───────────────────────
+CREATE TABLE IF NOT EXISTS project_sections (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  project_id INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+  section_type TEXT NOT NULL DEFAULT 'text'
+    CHECK(section_type IN ('text', 'media', 'gallery')),
+  title TEXT,
+  content TEXT,                  -- markdown / plain text for 'text' sections
+  media_id INTEGER REFERENCES media(id) ON DELETE SET NULL,
+  sort_order INTEGER NOT NULL DEFAULT 0,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- ─── Home page sections (admin-editable content blocks) ───────────────────────
+CREATE TABLE IF NOT EXISTS home_sections (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  section_key TEXT NOT NULL UNIQUE, -- e.g. 'hero', 'portfolio_grid', 'about_teaser', 'commission_cta'
+  label TEXT NOT NULL,              -- display name in admin
+  title TEXT,
+  subtitle TEXT,
+  body TEXT,                        -- markdown / plain text
+  cta_label TEXT,
+  cta_href TEXT,
+  media_id INTEGER REFERENCES media(id) ON DELETE SET NULL,
+  hidden INTEGER NOT NULL DEFAULT 0,
+  sort_order INTEGER NOT NULL DEFAULT 0,
+  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- Seed home sections
+INSERT OR IGNORE INTO home_sections (section_key, label, title, subtitle, sort_order) VALUES
+  ('hero',           'Hero / Featured Film',    'Kristin Thaeler',   'Animator · Storyteller · @firresketches', 0),
+  ('portfolio_grid', 'Portfolio Grid',          NULL,                NULL,                                      1),
+  ('about_teaser',   'About Teaser',            NULL,                NULL,                                      2),
+  ('commission_cta', 'Commission / Hire Me CTA', NULL,               NULL,                                      3);

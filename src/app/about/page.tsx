@@ -6,7 +6,9 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen pt-24 pb-20 px-6">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl md:text-5xl font-bold mb-12">About</h1>
+        <div className="mb-10">
+          <h1 className="text-2xl font-black tracking-tight text-foreground">About</h1>
+        </div>
 
         <section className="mb-16">
           <div className="w-32 h-32 rounded-full skeleton mb-8" />

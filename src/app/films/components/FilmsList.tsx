@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { r2url, isVideo } from '@/lib/r2'
@@ -7,11 +8,10 @@ import type { Media } from '@/types'
 
 function FilmSkeleton() {
   return (
-    <div className="mb-24">
-      <div className="h-px bg-dusk/40 mb-10" />
-      <div className="h-4 w-20 skeleton mb-6" />
-      <div className="aspect-video w-full skeleton mb-8" />
-      <div className="h-8 w-64 skeleton mb-4" />
+    <div className="mb-20">
+      <div className="h-px bg-border/30 mb-8" />
+      <div className="aspect-video w-full skeleton mb-6" />
+      <div className="h-6 w-64 skeleton mb-3" />
       <div className="h-4 w-full skeleton mb-2" />
       <div className="h-4 w-3/4 skeleton" />
     </div>
@@ -90,45 +90,47 @@ function FilmVideo({ film }: FilmVideoProps) {
 
 interface FilmEntryProps {
   film: Media
-  index: number
 }
 
-function FilmEntry({ film, index }: FilmEntryProps) {
-  const num = String(index + 1).padStart(2, '0')
-
+function FilmEntry({ film }: FilmEntryProps) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="relative mb-28"
+      className="relative mb-24"
     >
       {/* Divider */}
-      <div className="h-px bg-linear-to-r from-primary/50 via-dusk/40 to-transparent mb-10" />
-
-      {/* Film number */}
-      <div className="flex items-baseline gap-4 mb-6">
-        <span className="text-[11px] tracking-[0.2em] uppercase text-primary font-semibold">Film</span>
-        <span className="text-6xl md:text-8xl font-black text-dusk/60 leading-none select-none">{num}</span>
-      </div>
+      <div className="h-px bg-border/30 mb-8" />
 
       {/* Video — full width, cinematic */}
-      <div className="relative w-full bg-surface rounded-xl overflow-hidden mb-8">
+      <div className="relative w-full bg-surface rounded-xl overflow-hidden mb-6">
         <FilmVideo film={film} />
       </div>
 
-      {/* Info — two column on md+ */}
-      <div className="grid md:grid-cols-[1fr_auto] gap-6 items-start">
+      {/* Info */}
+      <div className="grid md:grid-cols-[1fr_auto] gap-4 items-start">
         <div>
           {film.title && (
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-3 text-foreground">
-              {film.title}
+            <h2 className="text-2xl font-black tracking-tight mb-2 text-foreground hover:text-primary transition-colors">
+              <Link href={`/films/${film.id}`}>{film.title}</Link>
             </h2>
           )}
           {film.description && (
-            <p className="text-muted leading-relaxed max-w-xl">{film.description}</p>
+            <p className="text-muted leading-relaxed max-w-xl text-sm">{film.description}</p>
           )}
+          <div className="mt-4">
+            <Link
+              href={`/films/${film.id}`}
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/75 transition-colors"
+            >
+              See more
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M7 7h10v10" />
+              </svg>
+            </Link>
+          </div>
         </div>
         {film.created_date && (
           <p className="text-[11px] tracking-[0.15em] uppercase text-muted pt-1 whitespace-nowrap">
@@ -164,8 +166,8 @@ export default function FilmsList() {
 
   return (
     <div>
-      {films.map((film, i) => (
-        <FilmEntry key={film.id} film={film} index={i} />
+      {films.map((film) => (
+        <FilmEntry key={film.id} film={film} />
       ))}
     </div>
   )

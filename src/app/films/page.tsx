@@ -6,7 +6,9 @@ export default function FilmsPage() {
   return (
     <div className="min-h-screen pt-24 pb-20 px-6">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl md:text-5xl font-bold mb-12">Films</h1>
+        <div className="mb-10">
+          <h1 className="text-2xl font-black tracking-tight text-foreground">Films</h1>
+        </div>
         <FilmsList />
       </div>
     </div>
