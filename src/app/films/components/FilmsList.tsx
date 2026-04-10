@@ -18,6 +18,76 @@ function FilmSkeleton() {
   )
 }
 
+// Generates a thumbnail from the middle of a video using canvas
+function useVideoMidThumbnail(src: string, skip: boolean): string | null {
+  const [dataUrl, setDataUrl] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (skip || !src) return
+    const video = document.createElement('video')
+    video.crossOrigin = 'anonymous'
+    video.preload = 'metadata'
+    video.muted = true
+    video.src = src
+
+    const onLoaded = () => {
+      if (!isFinite(video.duration) || video.duration === 0) return
+      video.currentTime = video.duration * 0.5
+    }
+    const onSeeked = () => {
+      try {
+        const canvas = document.createElement('canvas')
+        canvas.width = video.videoWidth
+        canvas.height = video.videoHeight
+        const ctx = canvas.getContext('2d')
+        ctx?.drawImage(video, 0, 0, canvas.width, canvas.height)
+        setDataUrl(canvas.toDataURL('image/jpeg', 0.8))
+      } catch {
+        // CORS or decode error — silently skip
+      }
+      video.src = ''
+    }
+
+    video.addEventListener('loadedmetadata', onLoaded)
+    video.addEventListener('seeked', onSeeked)
+    video.load()
+
+    return () => {
+      video.removeEventListener('loadedmetadata', onLoaded)
+      video.removeEventListener('seeked', onSeeked)
+      video.src = ''
+    }
+  }, [src, skip])
+
+  return dataUrl
+}
+
+interface FilmVideoProps {
+  film: Media
+}
+
+function FilmVideo({ film }: FilmVideoProps) {
+  const src = r2url(film.filename)
+  const customPoster = film.thumbnail ? r2url(film.thumbnail) : null
+  const autoPoster = useVideoMidThumbnail(src, !!customPoster || !isVideo(film.filename))
+  const poster = customPoster ?? autoPoster ?? undefined
+
+  if (!isVideo(film.filename)) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={src} alt={film.title ?? ''} className="w-full aspect-video object-cover" />
+  }
+
+  return (
+    <video
+      src={src}
+      controls
+      playsInline
+      className="w-full aspect-video object-cover"
+      poster={poster}
+    />
+  )
+}
+
 interface FilmEntryProps {
   film: Media
   index: number
@@ -44,19 +114,8 @@ function FilmEntry({ film, index }: FilmEntryProps) {
       </div>
 
       {/* Video — full width, cinematic */}
-      <div className="relative w-full bg-surface-elevated rounded-xl overflow-hidden mb-8 group">
-        {isVideo(film.filename) ? (
-          <video
-            src={r2url(film.filename)}
-            controls
-            playsInline
-            className="w-full aspect-video object-cover"
-            poster={film.thumbnail ? r2url(film.thumbnail) : undefined}
-          />
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={r2url(film.filename)} alt={film.title ?? ''} className="w-full aspect-video object-cover" />
-        )}
+      <div className="relative w-full bg-surface rounded-xl overflow-hidden mb-8">
+        <FilmVideo film={film} />
       </div>
 
       {/* Info — two column on md+ */}
